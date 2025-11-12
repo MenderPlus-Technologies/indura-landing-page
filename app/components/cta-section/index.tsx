@@ -1,9 +1,19 @@
+'use client';
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import React, { JSX } from "react";
+import React, { JSX, useState } from "react";
+import { Modal } from "../reusable-modal";
 
 export const CallToActionWrapperSection = (): JSX.Element => {
+   const [showFormModal, setShowFormModal] = useState(false);
+    const [loading, setLoading] = useState(false);
+  
+    const handleEarlyAccess = () => {
+      setLoading(true);
+      setShowFormModal(true);
+    };
   return (
+    <>
     <section className="flex flex-col items-center plusJakarta gap-12 md:gap-[72px] mt-12 lg:mt-0 pt-8 pb-16 md:pb-[88px] w-full">
       <div
         className="relative flex flex-col items-center justify-center gap-6 md:gap-8 
@@ -42,6 +52,7 @@ export const CallToActionWrapperSection = (): JSX.Element => {
         {/* CTA Button */}
         <div className="relative z-10 flex items-center justify-center mt-6 md:mt-8">
           <Button
+              onClick={handleEarlyAccess}
             className="h-12 cursor-pointer  sm:h-[52px] px-5 sm:px-6 py-3 bg-white 
             text-[#009688] rounded-xl border border-[#dfe1e6] 
             hover:bg-white/90 font-semibold text-sm sm:text-base leading-[24.8px]"
@@ -51,5 +62,43 @@ export const CallToActionWrapperSection = (): JSX.Element => {
         </div>
       </div>
     </section>
+        <Modal
+            isOpen={showFormModal}
+            onClose={() => setShowFormModal(false)}
+            maxWidth="2xl"
+          >
+            <div className="relative w-full h-[600px]">
+              {/* Loader overlay */}
+              {loading && (
+                <div className="absolute inset-0 flex items-center justify-center bg-white/80 z-10">
+                  <div className="animate-spin rounded-full h-12 w-12 border-4 border-t-transparent border-[#009688]" />
+                </div>
+              )}
+    
+              <iframe
+                src="https://forms.gle/jZpee78KBPccwMBp6"
+                width="100%"
+                height="600"
+                frameBorder="0"
+                marginHeight={0}
+                marginWidth={0}
+                className="rounded-b-lg"
+                onLoad={() => setLoading(false)}
+                loading="lazy"
+              ></iframe>
+            </div>
+    
+            <div className="p-4 text-center border-t bg-gray-50">
+              <button
+                onClick={() =>
+                  window.open("https://forms.gle/jZpee78KBPccwMBp6", "_blank")
+                }
+                className="text-[#009688] hover:underline text-sm font-medium"
+              >
+                Prefer to open in a new tab? →
+              </button>
+            </div>
+          </Modal>
+          </>
   );
 };
