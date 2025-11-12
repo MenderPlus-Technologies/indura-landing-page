@@ -76,7 +76,7 @@ export const FeatureHighlightsSection = (): JSX.Element => {
                     </div>
                   </div>
 
-                  <div className="relative w-full h-[300px] sm:h-[300px] md:h-[500px] rounded-t-[3.6px] overflow-hidden">
+                  <div className="relative w-full h-[300px] xl:h-[600px] sm:h-[300px] md:h-[500px] rounded-t-[3.6px] overflow-hidden">
                     <Image
                       src={feature.image}
                       alt={feature.title}
@@ -116,7 +116,7 @@ export const FeatureHighlightsSection = (): JSX.Element => {
                     </div>
                   </div>
 
-                  <div className="relative w-full h-[300px] sm:h-0 md:h-[500px] rounded-t-[3.6px] overflow-hidden">
+                  <div className="relative w-full h-[300px] xl:h-[600px] sm:h-0 md:h-[500px] rounded-t-[3.6px] overflow-hidden">
                     <Image
                       src={feature.image}
                       alt={feature.title}
