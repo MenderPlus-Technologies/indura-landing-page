@@ -15,21 +15,21 @@ const features = [
     title: "Nearby Care Finder",
     description:
       "Locate facilities that accept Indura, check opening hours and services, then get directions. Save favorites for next time.",
-    image: "/Img (1).svg",
+    image: "/Img (3).svg",
   },
   {
     icon: "/Icon Finance.svg",
     title: "Pay in Seconds, Ease And Comfort In Your Fingers.",
     description:
       "Use QR, USSD, or the Idura app to pay at the counter. Providers see instant confirmation; you get instant receipts.",
-    image: "/Img (2).svg",
+    image: "/Img (1).svg",
   },
   {
     icon: "/Icon (3).svg",
     title: "Personalized Health Spend Insights",
     description:
       "See where your health money goes and what's likely next month. Idura suggests how much to set aside to stay prepared.",
-    image: "/Img (3).svg",
+    image: "/Img (2).svg",
   },
 ];
 
@@ -116,7 +116,7 @@ export const FeatureHighlightsSection = (): JSX.Element => {
                     </div>
                   </div>
 
-                  <div className="relative w-full h-[300px] sm:h-[300px] md:h-[500px] rounded-t-[3.6px] overflow-hidden">
+                  <div className="relative w-full h-[300px] sm:h-0 md:h-[500px] rounded-t-[3.6px] overflow-hidden">
                     <Image
                       src={feature.image}
                       alt={feature.title}

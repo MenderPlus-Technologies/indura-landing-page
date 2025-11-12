@@ -30,11 +30,11 @@ export const KeyFeaturesSection = (): JSX.Element => {
           Overview
         </p>
 
-       {/* <div className="w-full max-w-7xl mx-auto px-4 sm:px-4 md:px-8 lg:px-0"> */}
-  <h2 className="text-[#0d0d12] text-2xl sm:text-3xl md:text-[44px] lg:text-[52px] text-center leading-tight md:leading-tight lg:leading-[65px] font-medium tracking-[0]">
-    Smart Health Finance Solutions Using AI
-  </h2>
-{/* </div> */}
+        {/* <div className="w-full max-w-7xl mx-auto px-4 sm:px-4 md:px-8 lg:px-0"> */}
+        <h2 className="text-[#0d0d12] text-2xl sm:text-3xl md:text-[44px] lg:text-[52px] text-center leading-tight md:leading-tight lg:leading-[65px] font-medium tracking-[0]">
+          Smart Health Finance Solutions Using AI
+        </h2>
+        {/* </div> */}
 
         <p className="w-full max-w-[720px] font-normal text-[#666d80] text-sm sm:text-base md:text-lg text-center tracking-[0] leading-relaxed md:leading-[27.9px] px-4">
           Indura unifies savings, payments, and identity so people can access
@@ -44,11 +44,14 @@ export const KeyFeaturesSection = (): JSX.Element => {
 
       <div className="flex flex-col md:flex-row w-full max-w-[1200px] items-start gap-8 md:gap-8 lg:gap-12">
         {features.map((feature, index) => (
-          <div key={index} className="flex flex-col items-start gap-4 md:gap-6 flex-1 w-full">
+          <div
+            key={index}
+            className="flex flex-col items-start gap-4 md:gap-6 flex-1 w-full"
+          >
             <div className="inline-flex items-center justify-center gap-2 p-2.5 bg-white rounded-[10px] border border-solid border-[#eceff3] shadow-[0px_2px_4px_#0d0d1226]">
-              <Image 
-                className="w-6 h-6" 
-                alt={feature.title} 
+              <Image
+                className="w-6 h-6"
+                alt={feature.title}
                 src={feature.icon}
                 width={24}
                 height={24}

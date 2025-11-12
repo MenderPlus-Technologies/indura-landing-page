@@ -1,29 +1,39 @@
 import { Copyright } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import React from "react"; // Added React for JSX
 
+// --- UPDATED FEATURES ---
 const featuresLinks = [
-  "Lorem ipsum dolor sit",
-  "Lorem ipsum dolor sit",
-  "Lorem ipsum dolor sit amet consectetur.",
+  { name: "Health Savings Wallet", href: "#features" },
+  { name: "AI Health Assistant", href: "#features" },
+  { name: "Find Providers", href: "#providers" },
+  { name: "QR Payments", href: "#payments" },
 ];
 
-const companyLinks = ["About Us", "Contact Us"];
+// --- UPDATED COMPANY LINKS ---
+const companyLinks = [
+  { name: "About Us", href: "/" },
+  { name: "Providers", href: "/" },
+  { name: "FAQs", href: "#faq" }, // Assumes FAQ section has id="faq"
+  { name: "Contact Us", href: "#contact" },
+];
 
+// --- TODO: Update social media URLs ---
 const socialLinks = [
-  {
-    name: "Facebook",
-    href: "#",
-    image: "/akar-icons_facebook-fill.svg",
-  },
+  // {
+  //   name: "Facebook",
+  //   href: "#", // TODO: Add your Facebook URL
+  //   image: "/akar-icons_facebook-fill.svg",
+  // },
   {
     name: "Instagram",
-    href: "#",
+    href: "https://www.instagram.com/useindura?igsh=N3UyYWdhc2xkd3Z4", // TODO: Add your Instagram URL
     image: "/instagram-icon.svg",
   },
   {
     name: "LinkedIn",
-    href: "#",
+    href: "https://www.linkedin.com/showcase/indurahealth/", // TODO: Add your LinkedIn URL
     image: "/akar-icons_linkedin-v2-fill.svg",
   },
 ];
@@ -50,7 +60,7 @@ export default function FooterSection() {
           <p className="text-gray-500 text-sm sm:text-base leading-relaxed font-medium">
              Indura is the AI-powered health fintech platform that helps you save
             for care, pay anywhere with QR Code, and verify with a universal
-            Health ID built for Africa, online or offline.
+Other - Health ID built for Africa, online or offline.
           </p>
         </div>
 
@@ -62,13 +72,14 @@ export default function FooterSection() {
               Features
             </div>
             <div className="flex flex-col items-start gap-3 w-full">
-              {featuresLinks.map((link, index) => (
-                <div
-                  key={index}
+              {featuresLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  href={link.href}
                   className="font-medium text-gray-600 text-sm sm:text-base hover:text-gray-800 cursor-pointer transition-colors"
                 >
-                  {link}
-                </div>
+                  {link.name}
+                </Link>
               ))}
             </div>
           </div>
@@ -79,13 +90,14 @@ export default function FooterSection() {
               Company
             </div>
             <div className="flex flex-col items-start gap-3 w-full">
-              {companyLinks.map((link, index) => (
-                <div
-                  key={index}
+              {companyLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  href={link.href}
                   className="font-medium text-gray-600 text-sm sm:text-base hover:text-gray-800 cursor-pointer transition-colors"
                 >
-                  {link}
-                </div>
+                  {link.name}
+                </Link>
               ))}
             </div>
           </div>
@@ -99,7 +111,7 @@ export default function FooterSection() {
           <div className="inline-flex items-center gap-1">
             <Copyright className="w-4 h-4 sm:w-5 sm:h-5 text-gray-500" />
             <div className="font-normal text-gray-500 text-sm sm:text-base whitespace-nowrap">
-              2025 Indura. All right reserved
+              {new Date().getFullYear()} Indura. All right reserved
             </div>
           </div>
 
@@ -111,6 +123,8 @@ export default function FooterSection() {
               href={social.href}
               className="hover:opacity-80 transition-opacity"
               aria-label={social.name}
+              target="_blank" // Open social links in new tab
+              rel="noopener noreferrer"
             >
               <Image
                 src={social.image}
