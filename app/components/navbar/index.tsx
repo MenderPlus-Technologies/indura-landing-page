@@ -17,15 +17,16 @@ export const NavigationMenuSection = (): JSX.Element => {
     <nav className="w-full bg-white shadow-sm border-b border-gray-200 plusJakarta">
       <div className="flex items-center justify-between px-4 sm:px-8 lg:px-10 xl:px-16 max-w-7xl mx-auto">
         {/* Logo */}
-        <div className="shrink-0 flex items-center w-20 h-20 sm:w-24 sm:h-24 lg:w-56">
+        <div className="shrink-0 flex items-center w-20 h-20 sm:w-24 sm:h-24 lg:w-20 gap-2">
           <Image
-            src="/Logo.svg"
+            src="https://res.cloudinary.com/dcxdrsgjs/image/upload/v1762925839/Group_phh0r8.svg"
             alt="Logo"
             width={500}
             height={500}
             className=""
             priority
           />
+          <p className="text-[#009688] font-bold text-xl">Indura</p>
         </div>
 
         {/* Desktop Navigation */}
@@ -33,7 +34,7 @@ export const NavigationMenuSection = (): JSX.Element => {
           {navigationItems.map((item, index) => (
             <button
               key={index}
-              className="px-3 py-2 rounded-md font-medium text-[#666d80] text-sm xl:text-base hover:bg-gray-50 hover:text-gray-900 transition-colors whitespace-nowrap"
+              className="px-3 cursor-pointer py-2 rounded-md font-medium text-[#666d80] text-sm xl:text-base hover:bg-gray-50 hover:text-gray-900 transition-colors whitespace-nowrap"
             >
               {item.label}
             </button>
@@ -42,7 +43,7 @@ export const NavigationMenuSection = (): JSX.Element => {
 
         {/* Desktop CTA Button */}
         <div className="hidden lg:flex items-center">
-          <Button className="h-10 gap-2 px-5 bg-[#009688] hover:bg-[#00897b] rounded-md transition-colors">
+          <Button className="h-10 cursor-pointer  gap-2 px-5 bg-[#009688] hover:bg-[#00897b] rounded-md transition-colors">
             <span className="font-semibold text-white text-sm xl:text-base whitespace-nowrap">
               Get Early Access
             </span>

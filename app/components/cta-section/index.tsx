@@ -42,7 +42,7 @@ export const CallToActionWrapperSection = (): JSX.Element => {
         {/* CTA Button */}
         <div className="relative z-10 flex items-center justify-center mt-6 md:mt-8">
           <Button
-            className="h-12 sm:h-[52px] px-5 sm:px-6 py-3 bg-white 
+            className="h-12 cursor-pointer  sm:h-[52px] px-5 sm:px-6 py-3 bg-white 
             text-[#009688] rounded-xl border border-[#dfe1e6] 
             hover:bg-white/90 font-semibold text-sm sm:text-base leading-[24.8px]"
           >

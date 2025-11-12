@@ -32,7 +32,7 @@ export const CallToActionFooterSection = (): JSX.Element => {
             </div>
 
             <div className="inline-flex gap-4 items-center mt-2">
-              <Button className="h-12 md:h-[52px] justify-center gap-2 px-6 md:px-8 py-3 md:py-4 bg-white rounded-xl border border-solid border-[#dfe1e6] font-semibold text-[#009688] text-sm md:text-base tracking-[0] leading-[24.8px] hover:bg-white/90">
+              <Button className="cursor-pointer  h-12 md:h-[52px] justify-center gap-2 px-6 md:px-8 py-3 md:py-4 bg-white rounded-xl border border-solid border-[#dfe1e6] font-semibold text-[#009688] text-sm md:text-base tracking-[0] leading-[24.8px] hover:bg-white/90">
                 Get Early Access
               </Button>
             </div>

@@ -122,7 +122,7 @@ export const ContactFormSection = (): JSX.Element => {
             </div>
 
             <div className="flex justify-center w-full">
-              <Button className="h-[52px] px-6 bg-[#009688] hover:bg-[#00897b] text-white font-semibold rounded-xl w-full">
+              <Button className="h-[52px] cursor-pointer  px-6 bg-[#009688] hover:bg-[#00897b] text-white font-semibold rounded-xl w-full">
                 Send Message
               </Button>
             </div>

@@ -49,7 +49,7 @@ export const HeroBannerSection = (): JSX.Element => {
           >
             Indura is the AI-powered health fintech platform that helps you save
             for care, pay anywhere with QR Code, and verify with a universal
-            Health ID — built for Africa, online or offline.
+            Health ID built for Africa, online or offline.
           </p>
         </div>
 
@@ -61,7 +61,7 @@ export const HeroBannerSection = (): JSX.Element => {
     <Button
       key={button.id}
       variant="outline"
-      className="relative flex items-center justify-start 
+      className="relative cursor-pointer  flex items-center justify-start 
       w-[120px] sm:w-[140px] md:w-[146.36px] 
       h-[42px] sm:h-[46px] md:h-[48.79px] 
       bg-black rounded-[6px] sm:rounded-[7.32px] 

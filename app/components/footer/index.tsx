@@ -31,26 +31,26 @@ const socialLinks = [
 
 export default function FooterSection() {
   return (
-    <footer className="flex flex-col items-start gap-12 md:gap-16 lg:gap-[72px] px-4 sm:px-8 md:px-16 lg:px-24 xl:px-[120px] py-12 md:py-16 lg:py-20 w-full bg-white border-t border-gray-200">
+    <footer className="plusJakarta flex flex-col items-start gap-12 md:gap-16 lg:gap-[72px] px-4 sm:px-8 md:px-16 lg:px-24 xl:px-[120px] py-12 md:py-16 lg:py-20 w-full bg-white border-t border-gray-200">
       {/* Main Content */}
       <div className="flex flex-col lg:flex-row items-start justify-between w-full gap-8 lg:gap-4">
         {/* Logo and Description */}
         <div className="flex flex-col w-full lg:w-[335.5px] items-start gap-4">
-          <div className="flex items-center w-20 h-20 sm:w-24 sm:h-24">
-             <Image
-                        src="/Logo.svg"
-              alt="Logo"
-              className="w-full h-full object-contain"
-               width={500}
-            height={500}
-            priority
-
-            />
-          </div>
+         <div className="shrink-0 flex items-center w-20 h-20 sm:w-24 sm:h-24 lg:w-20 gap-2">
+                  <Image
+                    src="https://res.cloudinary.com/dcxdrsgjs/image/upload/v1762925839/Group_phh0r8.svg"
+                    alt="Logo"
+                    width={500}
+                    height={500}
+                    className=""
+                    priority
+                  />
+                  <p className="text-[#009688] font-bold text-xl">Indura</p>
+                </div>
           <p className="text-gray-500 text-sm sm:text-base leading-relaxed font-medium">
-            Lorem ipsum dolor sit amet consectetur. Tristique in nunc nulla
-            volutpat sed vulputate vitae. Ipsum scelerisque eu orci neque quam
-            sagittis pharetra pulvinar. Elit sed.
+             Indura is the AI-powered health fintech platform that helps you save
+            for care, pay anywhere with QR Code, and verify with a universal
+            Health ID built for Africa, online or offline.
           </p>
         </div>
 
