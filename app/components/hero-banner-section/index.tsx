@@ -26,54 +26,86 @@ const appStoreButtons = [
 
 export const HeroBannerSection = (): JSX.Element => {
   return (
-    <section
-      className="flex flex-col w-full items-center plusJakarta pt-12 md:pt-16 lg:pt-24 px-4 sm:px-8 md:px-12 lg:px-20 xl:px-[120px] relative overflow-hidden bg-[url('/Hero.svg')] bg-cover bg-center bg-no-repeat pb-0"
-    >
+    <section className="flex flex-col w-full items-center plusJakarta pt-12 md:pt-16 lg:pt-24 px-4 sm:px-8 md:px-12 lg:px-20 xl:px-[120px] relative overflow-hidden bg-[url('/Hero.svg')] bg-cover bg-center bg-no-repeat pb-0">
       <div className="flex flex-col items-center justify-center gap-6 md:gap-8 lg:gap-10 relative self-stretch w-full flex-[0_0_auto]">
         <div className="flex flex-col items-center justify-center gap-3 md:gap-4 relative self-stretch w-full flex-[0_0_auto]">
-          <h1 className="max-w-[1016px] w-full px-4 -mt-px text-[#0d0d12] text-3xl sm:text-4xl md:text-5xl lg:text-[56px] xl:text-[68px] text-center leading-tight md:leading-[1.2] lg:leading-[85px] relative font-medium tracking-[0]">
+          <h1
+            className="max-w-[1016px] w-full px-4 -mt-px 
+  text-[#0d0d12] text-2xl sm:text-3xl md:text-4xl lg:text-[56px] xl:text-[68px] 
+  text-center font-medium tracking-[0] 
+  leading-[1.3] sm:leading-tight md:leading-[1.2] lg:leading-[85px] 
+  relative"
+          >
             Revolutionizing Health Payments &amp; Savings with AI
           </h1>
 
-          <p className="relative max-w-[601px] w-full px-4 font-normal text-[#666d80] text-sm sm:text-base md:text-lg text-center tracking-[0] leading-relaxed md:leading-[27.9px]">
+          <p
+            className="relative max-w-[601px] w-full px-4 
+  font-normal text-[#666d80] 
+  text-xs sm:text-sm md:text-base lg:text-lg 
+  text-center tracking-[0] 
+  leading-[1.6] sm:leading-[1.65] md:leading-[27.9px] 
+  wrap-break-word"
+          >
             Indura is the AI-powered health fintech platform that helps you save
-            for care, pay anywhere QR Code, and verify with a universal Health
-            ID, built for Africa, online or offline.
+            for care, pay anywhere with QR Code, and verify with a universal
+            Health ID — built for Africa, online or offline.
           </p>
         </div>
 
-        <div className="flex flex-wrap items-center justify-center gap-4 md:gap-[29.27px] relative flex-[0_0_auto]">
-          {appStoreButtons.map((button) => (
-            <Button
-              key={button.id}
-              variant="outline"
-              className="relative w-[140px] sm:w-[146.36px] h-[46px] sm:h-[48.79px] bg-black rounded-[7.32px] overflow-hidden border-[1.22px] border-solid border-[#a6a6a6] p-0 hover:bg-black/90"
-            >
-              <Image
-                className={`absolute top-2 sm:top-2.5 left-2 sm:left-2.5 ${button.iconWidth} ${button.iconHeight}`}
-                alt={button.iconAlt}
-                src={button.icon}
-                width={26}
-                height={29}
-              />
+       <div
+  className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 md:gap-[29.27px] 
+  relative flex-[0_0_auto] px-2 sm:px-4"
+>
+  {appStoreButtons.map((button) => (
+    <Button
+      key={button.id}
+      variant="outline"
+      className="relative flex items-center justify-start 
+      w-[120px] sm:w-[140px] md:w-[146.36px] 
+      h-[42px] sm:h-[46px] md:h-[48.79px] 
+      bg-black rounded-[6px] sm:rounded-[7.32px] 
+      overflow-hidden border border-[#a6a6a6] 
+      p-0 hover:bg-black/90 transition-all duration-200"
+    >
+      {/* Icon */}
+      <Image
+        className={`absolute top-2 sm:top-2.5 left-2 sm:left-2.5 ${button.iconWidth} ${button.iconHeight}`}
+        alt={button.iconAlt}
+        src={button.icon}
+        width={24}
+        height={28}
+      />
 
-              <div className="flex flex-col w-[85px] sm:w-[95px] items-start absolute top-[calc(50.00%-16px)] left-9 sm:left-11">
-                <div className="relative mt-[-1.22px] font-normal text-white text-[10px] sm:text-[11px] tracking-[0] leading-[11.0px]">
-                  {button.topText}
-                </div>
+      {/* Text */}
+      <div
+        className="flex flex-col items-start 
+        absolute top-1/2 -translate-y-1/2 
+        left-9 sm:left-10 md:left-11"
+      >
+        <div
+          className="font-normal text-white 
+          text-[9px] sm:text-[10px] md:text-[11px] 
+          leading-[1.1] tracking-[0]"
+        >
+          {button.topText}
+        </div>
 
-                <div className="relative w-fit text-end font-medium text-white text-[14px] sm:text-[16px] tracking-[-0.57px] leading-[21.0px] whitespace-nowrap">
-                  {button.bottomText}
-                </div>
-              </div>
-            </Button>
-          ))}
+        <div
+          className="font-medium text-white 
+          text-[12px] sm:text-[14px] md:text-[16px] 
+          tracking-[-0.57px] leading-[1.4] whitespace-nowrap"
+        >
+          {button.bottomText}
         </div>
       </div>
+    </Button>
+  ))}
+</div>
 
-      <div className="relative w-full max-w-[1432px] sm:h-[600px] md:h-[600px] lg:h-[600px] xl:h-[588px] -mx-4 sm:-mx-8 md:-mx-12 lg:-mx-20 xl:-mx-[116px] overflow-hidden">
-        
       </div>
+
+      <div className="relative w-full max-w-[1432px] h-60 sm:h-[300px] md:h-[390px] lg:h-[600px] xl:h-[588px] -mx-4 sm:-mx-8 md:-mx-12 lg:-mx-20 xl:-mx-[116px] overflow-hidden"></div>
 
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[280px] sm:w-[400px] md:w-[500px] lg:w-[650px] xl:w-[761px] h-auto">
         <Image

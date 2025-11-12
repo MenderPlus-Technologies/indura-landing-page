@@ -30,9 +30,11 @@ export const KeyFeaturesSection = (): JSX.Element => {
           Overview
         </p>
 
-        <h2 className="w-full text-[#0d0d12] text-3xl sm:text-4xl md:text-[44px] lg:text-[52px] text-center leading-tight md:leading-tight lg:leading-[65px] font-medium tracking-[0] px-4">
-          Smart Health Finance Solutions Using AI
-        </h2>
+       {/* <div className="w-full max-w-7xl mx-auto px-4 sm:px-4 md:px-8 lg:px-0"> */}
+  <h2 className="text-[#0d0d12] text-2xl sm:text-3xl md:text-[44px] lg:text-[52px] text-center leading-tight md:leading-tight lg:leading-[65px] font-medium tracking-[0]">
+    Smart Health Finance Solutions Using AI
+  </h2>
+{/* </div> */}
 
         <p className="w-full max-w-[720px] font-normal text-[#666d80] text-sm sm:text-base md:text-lg text-center tracking-[0] leading-relaxed md:leading-[27.9px] px-4">
           Indura unifies savings, payments, and identity so people can access
