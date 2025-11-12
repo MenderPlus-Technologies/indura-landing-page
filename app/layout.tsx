@@ -21,6 +21,7 @@ const plusJakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   title: "Indura",
   description: "",
+  icons:"https://res.cloudinary.com/dcxdrsgjs/image/upload/v1762925839/Group_phh0r8.svg"
 };
 
 export default function RootLayout({
