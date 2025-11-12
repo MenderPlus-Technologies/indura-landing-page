@@ -16,13 +16,21 @@ export default function Homepage() {
 
       <main className="w-full flex flex-col">
         <HeroBannerSection />
-        <KeyFeaturesSection />
-        <FeatureHighlightsSection />
+        <section id="features">
+          <KeyFeaturesSection />
+          <FeatureHighlightsSection />
+        </section>
         <CustomerTestimonialsSection />
         <CallToActionFooterSection />
-        <FrequentlyAskedQuestionsSection />
-        <ContactFormSection />
-        <CallToActionWrapperSection />
+        <section id="faq">
+          <FrequentlyAskedQuestionsSection />
+        </section>
+        <section id="contact">
+          <ContactFormSection />
+        </section>
+        <section id="join-waiting-list">
+          <CallToActionWrapperSection />
+        </section>
         <FooterSection />
       </main>
     </div>

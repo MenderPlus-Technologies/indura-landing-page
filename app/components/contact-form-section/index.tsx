@@ -1,28 +1,42 @@
-import React, { JSX } from "react";
+"use client";
+import React, { JSX, useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@radix-ui/react-label";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import { toast } from "sonner"; 
+
+// Validation schema
+const contactSchema = z.object({
+  fullName: z.string().min(2, "Name must be at least 2 characters"),
+  email: z.string().email("Please enter a valid email"),
+  message: z.string().min(10, "Message must be at least 10 characters"),
+});
+
+type ContactFormData = z.infer<typeof contactSchema>;
 
 const formFields = [
   {
-    id: "fullName",
+    id: "fullName" as const,
     label: "Full Name",
     placeholder: "Input your full name",
     type: "input",
     required: true,
   },
   {
-    id: "email",
+    id: "email" as const,
     label: "Email",
     placeholder: "example@email.com",
     type: "input",
     required: true,
   },
   {
-    id: "message",
+    id: "message" as const,
     label: "Message",
     placeholder: "Input your message",
     type: "textarea",
@@ -31,6 +45,43 @@ const formFields = [
 ];
 
 export const ContactFormSection = (): JSX.Element => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<ContactFormData>({
+    resolver: zodResolver(contactSchema),
+  });
+
+  const onSubmit = async (data: ContactFormData) => {
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to send message");
+      }
+
+      toast.success("Message sent successfully! We'll get back to you soon.");
+      reset();
+    } catch (error) {
+      toast.error("Failed to send message. Please try again.");
+      console.error("Contact form error:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <section className="relative w-full plusJakarta flex flex-col items-center justify-center gap-11 pt-0 pb-60 lg:40 px-4 sm:px-6 md:px-8 bg-white">
       {/* Background Section */}
@@ -85,7 +136,7 @@ export const ContactFormSection = (): JSX.Element => {
         </CardHeader>
 
         <CardContent className="px-6 md:px-10 pb-10 pt-8">
-          <div className="flex flex-col items-start gap-8 w-full">
+          <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-start gap-8 w-full">
             <div className="flex flex-col items-start gap-6 w-full">
               {formFields.map((field) => (
                 <div key={field.id} className="flex flex-col items-start gap-1 w-full">
@@ -104,17 +155,29 @@ export const ContactFormSection = (): JSX.Element => {
 
                   <div className="flex flex-col items-start gap-1.5 w-full">
                     {field.type === "input" ? (
-                      <Input
-                        id={field.id}
-                        placeholder={field.placeholder}
-                        className="h-12 px-3 py-1.5 bg-white rounded-[10px] border border-[#dfe1e6] w-full"
-                      />
+                      <>
+                        <Input
+                          id={field.id}
+                          placeholder={field.placeholder}
+                          className="h-12 px-3 py-1.5 bg-white rounded-[10px] border border-[#dfe1e6] w-full"
+                          {...register(field.id)}
+                        />
+                        {errors[field.id] && (
+                          <p className="text-red-500 text-xs">{errors[field.id]?.message}</p>
+                        )}
+                      </>
                     ) : (
-                      <Textarea
-                        id={field.id}
-                        placeholder={field.placeholder}
-                        className="h-[132px] px-3 py-1.5 bg-white rounded-[10px] border border-[#dfe1e6] resize-none w-full"
-                      />
+                      <>
+                        <Textarea
+                          id={field.id}
+                          placeholder={field.placeholder}
+                          className="h-[132px] px-3 py-1.5 bg-white rounded-[10px] border border-[#dfe1e6] resize-none w-full"
+                          {...register(field.id)}
+                        />
+                        {errors[field.id] && (
+                          <p className="text-red-500 text-xs">{errors[field.id]?.message}</p>
+                        )}
+                      </>
                     )}
                   </div>
                 </div>
@@ -122,11 +185,15 @@ export const ContactFormSection = (): JSX.Element => {
             </div>
 
             <div className="flex justify-center w-full">
-              <Button className="h-[52px] cursor-pointer  px-6 bg-[#009688] hover:bg-[#00897b] text-white font-semibold rounded-xl w-full">
-                Send Message
+              <Button 
+                type="submit"
+                disabled={isSubmitting}
+                className="h-[52px] cursor-pointer px-6 bg-[#009688] hover:bg-[#00897b] text-white font-semibold rounded-xl w-full disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isSubmitting ? "Sending..." : "Send Message"}
               </Button>
             </div>
-          </div>
+          </form>
         </CardContent>
       </Card>
     </section>
