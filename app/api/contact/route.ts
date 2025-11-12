@@ -19,7 +19,7 @@ export async function POST(request: Request) {
     // Send email using Resend
     const { data, error } = await resend.emails.send({
       from: "Indura Contact Form <onboarding@resend.dev>", // Replace with your verified domain
-      to: ["sofiagabriel722@gmail.com"], // Your email to receive submissions
+      to: ["hello@menderplus.com"], // Your email to receive submissions
       replyTo: email,
       subject: `New Contact Form Submission from ${fullName}`,
       html: `
