@@ -6,18 +6,18 @@ import { JSX } from "react";
 const appStoreButtons = [
   {
     id: "playstore",
-    icon: "/playstore.svg",
+    icon: "/Playstore.svg",
     iconAlt: "Playstore",
-    iconWidth: "w-[26px]",
+    iconWidth: "w-[22px]",
     iconHeight: "h-[29px]",
     topText: "GET IT ON",
     bottomText: "Google Play",
   },
   {
     id: "appstore",
-    icon: "/apple.svg",
+    icon: "/Apple.svg",
     iconAlt: "Apple",
-    iconWidth: "w-6",
+    iconWidth: "w-5",
     iconHeight: "h-[29px]",
     topText: "Download on the",
     bottomText: "App Store",
