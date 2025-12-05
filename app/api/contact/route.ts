@@ -15,12 +15,12 @@ export async function POST(request: Request) {
       );
     }
 
- const { data, error } = await resend.emails.send({
-  from: "Indura Contact Form <no-reply@indurahealth.com>",
-  to: ["hello@menderplus.com"],
-  replyTo: email,
-  subject: `New Contact Form Submission from ${fullName}`,
-  html: `
+    const { data, error } = await resend.emails.send({
+      from: "Indura Contact Form <no-reply@indurahealth.com>",
+      to: ["hello@menderplus.com"],
+      replyTo: email,
+      subject: `New Contact Form Submission from ${fullName}`,
+      html: `
     <div style="font-family: Arial, sans-serif; padding: 20px;">
       <h2 style="color: #009688;">New Contact Form Submission</h2>
       <div style="margin-top: 20px;">
@@ -33,8 +33,7 @@ export async function POST(request: Request) {
       </div>
     </div>
   `,
-});
-
+    });
 
     if (error) {
       console.error("Resend error:", error);
@@ -43,14 +42,6 @@ export async function POST(request: Request) {
         { status: 500 }
       );
     }
-
-    if (error) {
-  console.error("Resend error:", error);
-  return NextResponse.json(
-    { error: error.message || "Failed to send email" },
-    { status: 500 }
-  );
-}
 
 
     return NextResponse.json({ success: true, data }, { status: 200 });
