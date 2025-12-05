@@ -69,7 +69,7 @@ export const HeroBannerSection = (): JSX.Element => {
         <img
           className="w-full h-full object-contain"
           alt="Phone mockups"
-          src="https://res.cloudinary.com/dcxdrsgjs/image/upload/v1764951766/Group_1000005655_mudqsb.svg"
+          src="https://res.cloudinary.com/dcxdrsgjs/image/upload/v1764952208/Group_1000005655_x3l119.png"
           loading="eager"
         />
       </div>
