@@ -6,25 +6,29 @@ const features = [
     icon: "/Icon (1).svg",
     title: "Save Smarter for Your Healthcare.",
     description: "Indura's AI helps you prepare for real-life health costs—routine visits, meds, emergencies—without the stress.",
-    image: "/Img.svg",
+    mobileImage: "https://res.cloudinary.com/dcxdrsgjs/image/upload/v1764952777/Img_e59jj4.png",
+    desktopImage: "/Img.svg", // Add your desktop image URL
   },
   {
     icon: "/Icon (2).svg",
     title: "Nearby Care Finder",
     description: "Locate facilities that accept Indura, check opening hours and services, then get directions. Save favorites for next time.",
-    image: "/Img (3).svg",
+    mobileImage: "/Img (3).svg",
+    desktopImage: "/Img (3).svg", // Add your desktop image URL
   },
   {
     icon: "/Icon Finance.svg",
     title: "Pay in Seconds, Ease And Comfort In Your Fingers.",
     description: "Use QR, USSD, or the Idura app to pay at the counter. Providers see instant confirmation; you get instant receipts.",
-    image: "/Img (1).svg",
+    mobileImage: "https://res.cloudinary.com/dcxdrsgjs/image/upload/v1764952853/Img_1_i5pzdx.png",
+    desktopImage: "/Img (1).svg", // Add your desktop image URL
   },
   {
     icon: "/Icon (3).svg",
     title: "Personalized Health Spend Insights",
     description: "See where your health money goes and what's likely next month. Idura suggests how much to set aside to stay prepared.",
-    image: "/Img (2).svg",
+    mobileImage: "/Img (2).svg",
+    desktopImage: "/Img (2).svg", // Add your desktop image URL
   },
 ];
 
@@ -57,8 +61,15 @@ export const FeatureHighlightsSection = (): JSX.Element => {
                       </p>
                     </div>
                   </div>
-                  <div className="relative w-full h-[300px] sm:h-[350px] md:h-[450px] lg:h-[500px] xl:h-[600px] rounded-t-[3.6px] overflow-hidden">
-                    <img src={feature.image} alt={feature.title} className="w-full h-full object-cover" loading="lazy" />
+                  
+                  {/* Mobile/Tablet Image */}
+                  <div className="relative w-full h-[300px] sm:h-[350px] md:h-[450px] lg:hidden rounded-t-[3.6px] overflow-hidden">
+                    <img src={feature.mobileImage} alt={feature.title} className="w-full h-full object-cover" loading="lazy" />
+                  </div>
+                  
+                  {/* Desktop Image */}
+                  <div className="relative w-full h-[500px] xl:h-[600px] hidden lg:block rounded-t-[3.6px] overflow-hidden">
+                    <img src={feature.desktopImage} alt={feature.title} className="w-full h-full object-cover" loading="lazy" />
                   </div>
                 </CardContent>
               </Card>
@@ -80,8 +91,15 @@ export const FeatureHighlightsSection = (): JSX.Element => {
                       </p>
                     </div>
                   </div>
-                  <div className="relative w-full h-[300px] sm:h-[350px] md:h-[450px] lg:h-[500px] xl:h-[600px] rounded-t-[3.6px] overflow-hidden">
-                    <img src={feature.image} alt={feature.title} className="w-full h-full object-cover" loading="lazy" />
+                  
+                  {/* Mobile/Tablet Image */}
+                  <div className="relative w-full h-[300px] sm:h-[350px] md:h-[450px] lg:hidden rounded-t-[3.6px] overflow-hidden">
+                    <img src={feature.mobileImage} alt={feature.title} className="w-full h-full object-cover" loading="lazy" />
+                  </div>
+                  
+                  {/* Desktop Image */}
+                  <div className="relative w-full h-[500px] xl:h-[600px] hidden lg:block rounded-t-[3.6px] overflow-hidden">
+                    <img src={feature.desktopImage} alt={feature.title} className="w-full h-full object-cover" loading="lazy" />
                   </div>
                 </CardContent>
               </Card>

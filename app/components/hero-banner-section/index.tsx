@@ -65,11 +65,21 @@ export const HeroBannerSection = (): JSX.Element => {
 
       <div className="relative w-full max-w-[1432px] h-60 sm:h-[300px] md:h-[390px] lg:h-[600px] xl:h-[588px] -mx-4 sm:-mx-8 md:-mx-12 lg:-mx-20 xl:-mx-[116px] overflow-hidden"></div>
 
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[280px] sm:w-[400px] md:w-[500px] lg:w-[650px] xl:w-[761px] h-auto">
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[280px] sm:w-[400px] md:w-[500px] h-auto lg:hidden">
         <img
           className="w-full h-full object-contain"
           alt="Phone mockups"
           src="https://res.cloudinary.com/dcxdrsgjs/image/upload/v1764952208/Group_1000005655_x3l119.png"
+          loading="eager"
+        />
+      </div>
+
+      {/* Desktop Image - Hidden on small/medium screens */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[650px] xl:w-[761px] h-auto hidden lg:block">
+        <img
+          className="w-full h-full object-contain"
+          alt="Phone mockups"
+          src="https://res.cloudinary.com/dcxdrsgjs/image/upload/v1764951766/Group_1000005655_mudqsb.svg"
           loading="eager"
         />
       </div>
