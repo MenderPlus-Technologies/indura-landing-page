@@ -115,7 +115,7 @@ export const HeroBannerSection = (): JSX.Element => {
           height={679}
           priority
           quality={100}
-          sizes="(max-width: 640px) 280px, (max-width: 768px) 400px, (max-width: 1024px) 500px, (max-width: 1280px) 650px, 761px"
+          // sizes="(max-width: 640px) 280px, (max-width: 768px) 400px, (max-width: 1024px) 500px, (max-width: 1280px) 650px, 761px"
         />
       </div>
     </section>

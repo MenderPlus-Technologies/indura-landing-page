@@ -84,7 +84,7 @@ export const FeatureHighlightsSection = (): JSX.Element => {
                       fill
                       className="object-cover"
                       quality={100}
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 600px"
+                      // sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 600px"
                       priority={index === 0}
                     />
                   </div>
