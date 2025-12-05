@@ -63,6 +63,7 @@ export const FeatureHighlightsSection = (): JSX.Element => {
                       src={feature.icon}
                       width={36}
                       height={36}
+                      quality={100}
                     />
 
                     <div className="flex flex-col items-start gap-2 md:gap-[11.7px] flex-1">
@@ -76,12 +77,15 @@ export const FeatureHighlightsSection = (): JSX.Element => {
                     </div>
                   </div>
 
-                  <div className="relative w-full h-[300px] xl:h-[600px] sm:h-[300px] md:h-[500px] rounded-t-[3.6px] overflow-hidden">
+                  <div className="relative w-full h-[300px] sm:h-[350px] md:h-[450px] lg:h-[500px] xl:h-[600px] rounded-t-[3.6px] overflow-hidden">
                     <Image
                       src={feature.image}
                       alt={feature.title}
                       fill
                       className="object-cover"
+                      quality={100}
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 600px"
+                      priority={index === 0}
                     />
                   </div>
                 </CardContent>
@@ -103,6 +107,7 @@ export const FeatureHighlightsSection = (): JSX.Element => {
                       src={feature.icon}
                       width={36}
                       height={36}
+                      quality={100}
                     />
 
                     <div className="flex flex-col items-start gap-2 md:gap-[11.7px] flex-1">
@@ -116,12 +121,14 @@ export const FeatureHighlightsSection = (): JSX.Element => {
                     </div>
                   </div>
 
-                  <div className="relative w-full h-[300px] xl:h-[600px] sm:h-0 md:h-[500px] rounded-t-[3.6px] overflow-hidden">
+                  <div className="relative w-full h-[300px] sm:h-[350px] md:h-[450px] lg:h-[500px] xl:h-[600px] rounded-t-[3.6px] overflow-hidden">
                     <Image
                       src={feature.image}
                       alt={feature.title}
                       fill
                       className="object-cover"
+                      quality={100}
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 600px"
                     />
                   </div>
                 </CardContent>

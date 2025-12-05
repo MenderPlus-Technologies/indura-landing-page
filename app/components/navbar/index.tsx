@@ -35,7 +35,7 @@ export const NavigationMenuSection = (): JSX.Element => {
       <nav className="w-full bg-white shadow-sm border-b border-gray-200 plusJakarta sticky top-0 z-50">
         <div className="flex items-center justify-between px-4 sm:px-8 lg:px-10 xl:px-16 max-w-7xl mx-auto">
           {/* Logo */}
-          <div className="shrink-0 flex items-center w-20 h-20 sm:w-24 sm:h-24 lg:w-20 gap-2">
+          <div className="shrink-0 flex items-center w-10 h-20 sm:w-20 sm:h-20 lg:w-20 gap-2">
             <Image
               src="https://res.cloudinary.com/dcxdrsgjs/image/upload/v1762925839/Group_phh0r8.svg"
               alt="Logo"

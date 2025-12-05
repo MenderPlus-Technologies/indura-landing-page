@@ -53,56 +53,55 @@ export const HeroBannerSection = (): JSX.Element => {
           </p>
         </div>
 
-       <div
-  className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 md:gap-[29.27px] 
+        <div
+          className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 md:gap-[29.27px] 
   relative flex-[0_0_auto] px-2 sm:px-4"
->
-  {appStoreButtons.map((button) => (
-    <Button
-      key={button.id}
-      variant="outline"
-      className="relative cursor-pointer  flex items-center justify-start 
+        >
+          {appStoreButtons.map((button) => (
+            <Button
+              key={button.id}
+              variant="outline"
+              className="relative cursor-pointer  flex items-center justify-start 
       w-[120px] sm:w-[140px] md:w-[146.36px] 
       h-[42px] sm:h-[46px] md:h-[48.79px] 
       bg-black rounded-[6px] sm:rounded-[7.32px] 
       overflow-hidden border border-[#a6a6a6] 
       p-0 hover:bg-black/90 transition-all duration-200"
-    >
-      {/* Icon */}
-      <Image
-        className={`absolute top-2 sm:top-2.5 left-2 sm:left-2.5 ${button.iconWidth} ${button.iconHeight}`}
-        alt={button.iconAlt}
-        src={button.icon}
-        width={24}
-        height={28}
-      />
+            >
+              {/* Icon */}
+              <Image
+                className={`absolute top-2 sm:top-2.5 left-2 sm:left-2.5 ${button.iconWidth} ${button.iconHeight}`}
+                alt={button.iconAlt}
+                src={button.icon}
+                width={24}
+                height={28}
+              />
 
-      {/* Text */}
-      <div
-        className="flex flex-col items-start 
+              {/* Text */}
+              <div
+                className="flex flex-col items-start 
         absolute top-1/2 -translate-y-1/2 
         left-9 sm:left-10 md:left-11"
-      >
-        <div
-          className="font-normal text-white 
+              >
+                <div
+                  className="font-normal text-white 
           text-[9px] sm:text-[10px] md:text-[11px] 
           leading-[1.1] tracking-[0]"
-        >
-          {button.topText}
-        </div>
+                >
+                  {button.topText}
+                </div>
 
-        <div
-          className="font-medium text-white 
+                <div
+                  className="font-medium text-white 
           text-[12px] sm:text-[14px] md:text-[16px] 
           tracking-[-0.57px] leading-[1.4] whitespace-nowrap"
-        >
-          {button.bottomText}
+                >
+                  {button.bottomText}
+                </div>
+              </div>
+            </Button>
+          ))}
         </div>
-      </div>
-    </Button>
-  ))}
-</div>
-
       </div>
 
       <div className="relative w-full max-w-[1432px] h-60 sm:h-[300px] md:h-[390px] lg:h-[600px] xl:h-[588px] -mx-4 sm:-mx-8 md:-mx-12 lg:-mx-20 xl:-mx-[116px] overflow-hidden"></div>
@@ -114,6 +113,9 @@ export const HeroBannerSection = (): JSX.Element => {
           src="/phone-mockup.svg"
           width={761}
           height={679}
+          priority
+          quality={100}
+          sizes="(max-width: 640px) 280px, (max-width: 768px) 400px, (max-width: 1024px) 500px, (max-width: 1280px) 650px, 761px"
         />
       </div>
     </section>
