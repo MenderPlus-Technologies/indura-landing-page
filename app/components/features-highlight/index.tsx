@@ -13,7 +13,7 @@ const features = [
     icon: "/Icon (2).svg",
     title: "Nearby Care Finder",
     description: "Locate facilities that accept Indura, check opening hours and services, then get directions. Save favorites for next time.",
-    mobileImage: "https://res.cloudinary.com/dcxdrsgjs/image/upload/v1764953163/Img_3_gv4roc.png",
+    mobileImage: "https://res.cloudinary.com/dcxdrsgjs/image/upload/v1764953077/Img_2_m4bumr.png",
     desktopImage: "/Img (3).svg", // Add your desktop image URL
   },
   {
@@ -27,7 +27,7 @@ const features = [
     icon: "/Icon (3).svg",
     title: "Personalized Health Spend Insights",
     description: "See where your health money goes and what's likely next month. Idura suggests how much to set aside to stay prepared.",
-    mobileImage: "https://res.cloudinary.com/dcxdrsgjs/image/upload/v1764953077/Img_2_m4bumr.png",
+    mobileImage: "https://res.cloudinary.com/dcxdrsgjs/image/upload/v1764953163/Img_3_gv4roc.png",
     desktopImage: "/Img (2).svg", // Add your desktop image URL
   },
 ];
