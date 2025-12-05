@@ -8,7 +8,6 @@ export async function POST(request: Request) {
     const body = await request.json();
     const { fullName, email, message } = body;
 
-    // Validate the data
     if (!fullName || !email || !message) {
       return NextResponse.json(
         { error: "Missing required fields" },
@@ -16,34 +15,43 @@ export async function POST(request: Request) {
       );
     }
 
-    // Send email using Resend
-    const { data, error } = await resend.emails.send({
-      from: "Indura Contact Form <indurahealth.com>", // Replace with your verified domain
-      to: ["hello@menderplus.com"], // Your email to receive submissions
-      replyTo: email,
-      subject: `New Contact Form Submission from ${fullName}`,
-      html: `
-        <div style="font-family: Arial, sans-serif; padding: 20px;">
-          <h2 style="color: #009688;">New Contact Form Submission</h2>
-          <div style="margin-top: 20px;">
-            <p><strong>Name:</strong> ${fullName}</p>
-            <p><strong>Email:</strong> ${email}</p>
-            <p><strong>Message:</strong></p>
-            <p style="background-color: #f5f5f5; padding: 15px; border-radius: 5px;">
-              ${message}
-            </p>
-          </div>
-        </div>
-      `,
-    });
+ const { data, error } = await resend.emails.send({
+  from: "Indura Contact Form <no-reply@indurahealth.com>",
+  to: ["hello@menderplus.com"],
+  replyTo: email,
+  subject: `New Contact Form Submission from ${fullName}`,
+  html: `
+    <div style="font-family: Arial, sans-serif; padding: 20px;">
+      <h2 style="color: #009688;">New Contact Form Submission</h2>
+      <div style="margin-top: 20px;">
+        <p><strong>Name:</strong> ${fullName}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Message:</strong></p>
+        <p style="background-color: #f5f5f5; padding: 15px; border-radius: 5px;">
+          ${message}
+        </p>
+      </div>
+    </div>
+  `,
+});
+
 
     if (error) {
       console.error("Resend error:", error);
       return NextResponse.json(
-        { error: "Failed to send email" },
+        { error: error.message || "Failed to send email" },
         { status: 500 }
       );
     }
+
+    if (error) {
+  console.error("Resend error:", error);
+  return NextResponse.json(
+    { error: error.message || "Failed to send email" },
+    { status: 500 }
+  );
+}
+
 
     return NextResponse.json({ success: true, data }, { status: 200 });
   } catch (error) {
