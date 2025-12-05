@@ -16,21 +16,31 @@ export default function Homepage() {
 
       <main className="w-full flex flex-col">
         <HeroBannerSection />
-        <section id="features">
+        
+        {/* Changed from <section> to <div> - iOS Safari fix */}
+        <div id="features">
           <KeyFeaturesSection />
           <FeatureHighlightsSection />
-        </section>
+        </div>
+        
         <CustomerTestimonialsSection />
         <CallToActionFooterSection />
-        <section id="faq">
+        
+        {/* Changed from <section> to <div> - iOS Safari fix */}
+        <div id="faq">
           <FrequentlyAskedQuestionsSection />
-        </section>
-        <section id="contact">
+        </div>
+        
+        {/* Changed from <section> to <div> - iOS Safari fix */}
+        <div id="contact">
           <ContactFormSection />
-        </section>
-        <section id="join-waiting-list">
+        </div>
+        
+        {/* Changed from <section> to <div> - iOS Safari fix */}
+        <div id="join-waiting-list">
           <CallToActionWrapperSection />
-        </section>
+        </div>
+        
         <FooterSection />
       </main>
     </div>
