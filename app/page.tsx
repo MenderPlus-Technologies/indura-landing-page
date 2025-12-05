@@ -1,7 +1,7 @@
 import { ContactFormSection } from "./components/contact-form-section";
 import { CallToActionFooterSection } from "./components/cta-footer";
 import { CallToActionWrapperSection } from "./components/cta-section";
-import { CustomerTestimonialsSection } from "./components/customer-testimonials";
+// import { CustomerTestimonialsSection } from "./components/customer-testimonials";
 import { FrequentlyAskedQuestionsSection } from "./components/faq-section";
 import { FeatureHighlightsSection } from "./components/features-highlight";
 import FooterSection from "./components/footer";
@@ -23,7 +23,7 @@ export default function Homepage() {
           <FeatureHighlightsSection />
         </div>
         
-        <CustomerTestimonialsSection />
+        {/* <CustomerTestimonialsSection /> */}
         <CallToActionFooterSection />
         
         {/* Changed from <section> to <div> - iOS Safari fix */}
