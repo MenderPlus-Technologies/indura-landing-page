@@ -15,7 +15,7 @@ export const CallToActionFooterSection = (): JSX.Element => {
 
   return (
     <>
-      <section className="flex flex-col items-center plusJakarta pt-8 pb-12 md:pb-16 lg:pb-[88px] w-full">
+      <section className="flex flex-col items-center plusJakarta  pb-12 md:pb-16 lg:pb-[88px] w-full">
         <div className="relative w-full overflow-hidden mx-0 md:mx-4 lg:mx-8 rounded-none">
           {/* Background Image */}
           <div className="absolute inset-0 w-full h-full">
