@@ -12,7 +12,7 @@ const features = [
     icon: "/database-01.svg",
     title: "Effortless Payments",
     description:
-      "Pay at clinics, pharmacies, and labs via QR, USSD, or in-app with instant confirmations and receipts.",
+      "Pay at clinics, pharmacies, and labs via QR, or in-app with instant confirmations and receipts.",
   },
   {
     icon: "/server-01.svg",
