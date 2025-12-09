@@ -28,7 +28,7 @@ const features = [
     title: "Personalized Health Spend Insights",
     description: "See where your health money goes and what's likely next month. Indura suggests how much to set aside to stay prepared.",
     mobileImage: "https://res.cloudinary.com/dcxdrsgjs/image/upload/v1764953163/Img_3_gv4roc.png",
-    desktopImage: "/Img (2).svg", // Add your desktop image URL
+    desktopImage: "/health-insights.svg", // Add your desktop image URL
   },
 ];
 
