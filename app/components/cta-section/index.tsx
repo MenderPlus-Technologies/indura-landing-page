@@ -44,7 +44,7 @@ export const CallToActionWrapperSection = (): JSX.Element => {
             className="mt-3 font-normal text-white text-sm sm:text-base md:text-lg
             leading-relaxed md:leading-[27.9px] tracking-[0] max-w-[601px]"
           >
-            Join the waitlist and be first to try Idura&apos;s AI Savings,
+            Join the waitlist and be first to try Indura&apos;s AI Savings,
             Payments, and Health ID.
           </p>
         </div>

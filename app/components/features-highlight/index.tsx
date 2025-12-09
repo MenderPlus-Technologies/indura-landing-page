@@ -19,14 +19,14 @@ const features = [
   {
     icon: "/Icon Finance.svg",
     title: "Pay in Seconds, Ease And Comfort In Your Fingers.",
-    description: "Use QR, USSD, or the Idura app to pay at the counter. Providers see instant confirmation; you get instant receipts.",
+    description: "Use QR, USSD, or the Indura app to pay at the counter. Providers see instant confirmation; you get instant receipts.",
     mobileImage: "https://res.cloudinary.com/dcxdrsgjs/image/upload/v1764952853/Img_1_i5pzdx.png",
     desktopImage: "/Img (1).svg", // Add your desktop image URL
   },
   {
     icon: "/Icon (3).svg",
     title: "Personalized Health Spend Insights",
-    description: "See where your health money goes and what's likely next month. Idura suggests how much to set aside to stay prepared.",
+    description: "See where your health money goes and what's likely next month. Indura suggests how much to set aside to stay prepared.",
     mobileImage: "https://res.cloudinary.com/dcxdrsgjs/image/upload/v1764953163/Img_3_gv4roc.png",
     desktopImage: "/Img (2).svg", // Add your desktop image URL
   },
