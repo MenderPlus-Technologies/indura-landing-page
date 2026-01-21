@@ -1,6 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import Link from "next/link";
 import { JSX, useState } from "react";
 import { Modal } from "../reusable-modal";
 
@@ -60,8 +61,18 @@ export const NavigationMenuSection = (): JSX.Element => {
             ))}
           </div>
 
-          {/* Desktop CTA Button */}
-          <div className="hidden lg:flex items-center">
+          {/* Desktop CTA Buttons */}
+          <div className="hidden lg:flex items-center gap-3">
+            <Link href="/become-a-provider">
+              <Button
+                variant="outline"
+                className="h-10 cursor-pointer gap-2 px-5 border-[#009688] text-[#009688] hover:bg-[#009688] hover:text-white rounded-md transition-colors"
+              >
+                <span className="font-semibold text-sm xl:text-base whitespace-nowrap">
+                  Become a Provider
+                </span>
+              </Button>
+            </Link>
             <Button
               onClick={handleEarlyAccess}
               className="h-10 cursor-pointer gap-2 px-5 bg-[#009688] hover:bg-[#00897b] rounded-md transition-colors"
@@ -109,7 +120,18 @@ export const NavigationMenuSection = (): JSX.Element => {
                   {item.label}
                 </button>
               ))}
-              <div className="pt-2">
+              <div className="pt-2 space-y-2">
+                <Link href="/become-a-provider" className="block">
+                  <Button
+                    variant="outline"
+                    className="w-full h-12 gap-2 px-4 py-3 border-[#009688] text-[#009688] hover:bg-[#009688] hover:text-white rounded-lg transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <span className="font-semibold text-base">
+                      Become a Provider
+                    </span>
+                  </Button>
+                </Link>
                 <Button
                   onClick={handleEarlyAccess}
                   className="w-full h-12 gap-2 px-4 py-3 bg-[#009688] hover:bg-[#00897b] rounded-lg transition-colors"
