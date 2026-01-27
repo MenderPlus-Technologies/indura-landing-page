@@ -61,13 +61,13 @@ export const HeroBannerSection = (): JSX.Element => {
               </div>
             </Button>
           ))}
-          <Link href="/become-a-provider">
+          {/* <Link href="/become-a-provider">
             <Button
               className="h-[42px] sm:h-[46px] md:h-[48.79px] px-4 sm:px-5 md:px-6 bg-[#009688] hover:bg-[#00897b] text-white font-semibold rounded-[6px] sm:rounded-[7.32px] transition-all duration-200 text-xs sm:text-sm md:text-base whitespace-nowrap"
             >
               Become a Provider
             </Button>
-          </Link>
+          </Link> */}
         </div>
       </div>
 
