@@ -43,13 +43,18 @@ const Select = React.forwardRef<HTMLDivElement, SelectProps>(
       if (options.length > 0) return options;
       
       if (children) {
-        const childArray = React.Children.toArray(children) as React.ReactElement[];
+        const childArray = React.Children.toArray(children) as React.ReactElement<
+          React.HTMLAttributes<HTMLOptionElement> & { value?: string }
+       >[];
         return childArray
           .filter((child) => child.type === "option")
-          .map((child) => ({
-            value: child.props.value || "",
-            label: child.props.children || child.props.value || "",
-          }));
+          .map((child) => {
+            const props = child.props as { value?: string; children?: React.ReactNode };
+            return {
+              value: props.value || "",
+              label: (typeof props.children === "string" ? props.children : props.value) || "",
+            };
+          });
       }
       
       return [];

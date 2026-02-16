@@ -4,7 +4,7 @@ import * as z from "zod";
 export const step1Schema = z.object({
   facilityName: z.string().min(2, "Facility name must be at least 2 characters"),
   providerType: z.enum(["Clinic", "Hospital", "Pharmacy", "Lab", "Gym", "Others"], {
-    errorMap: () => ({ message: "Please select a provider type" }),
+    message: "Please select a provider type",
   }),
   state: z.string().min(1, "State is required"),
   lga: z.string().min(1, "LGA is required"),
@@ -19,7 +19,7 @@ export const step1Schema = z.object({
 export const step2Schema = z.object({
   registrationNumber: z.string().min(1, "Registration number is required"),
   documentType: z.enum(["operatingLicense", "cacCertificate"], {
-    errorMap: () => ({ message: "Please select a document type" }),
+    message: "Please select a document type",
   }),
   documentUrl: z.string().min(1, "Please upload a document"),
 });
@@ -28,7 +28,7 @@ export const step2Schema = z.object({
 export const step3Schema = z.object({
   contactFullName: z.string().min(2, "Full name must be at least 2 characters"),
   contactRole: z.enum(["Owner", "Medical Director", "Manager"], {
-    errorMap: () => ({ message: "Please select a contact role" }),
+    message: "Please select a contact role",
   }),
   contactPhoneNumber: z
     .string()
