@@ -33,7 +33,7 @@ export const NavigationMenuSection = (): JSX.Element => {
 
   return (
     <>
-      <nav className="w-full bg-white shadow-sm border-b border-gray-200 plusJakarta sticky top-0 z-50">
+      <nav className="w-full bg-white shadow-sm border-b border-gray-200 plusJakarta sticky top-0 z-50 transform-gpu will-change-transform">
         <div className="flex items-center justify-between px-4 sm:px-8 lg:px-10 xl:px-16 max-w-7xl mx-auto">
           {/* Logo */}
           <div className="shrink-0 flex items-center w-10 h-20 sm:w-20 sm:h-20 lg:w-20 gap-2">

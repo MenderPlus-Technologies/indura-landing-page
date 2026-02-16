@@ -15,16 +15,17 @@ export const CallToActionFooterSection = (): JSX.Element => {
 
   return (
     <>
-      <section className="flex flex-col items-center plusJakarta  pb-12 md:pb-16 lg:pb-[88px] w-full">
+      <section className="flex flex-col items-center plusJakarta  pb-12 md:pb-16 lg:pb-[88px] w-full transform-gpu">
         <div className="relative w-full overflow-hidden mx-0 md:mx-4 lg:mx-8 rounded-none">
           {/* Background Image */}
-          <div className="absolute inset-0 w-full h-full">
+          <div className="absolute inset-0 w-full h-full transform-gpu">
             <Image
               src="/CTA.svg"
               alt="Gradient background"
               fill
               className="object-cover"
               priority
+              sizes="100vw"
             />
           </div>
 
@@ -54,13 +55,14 @@ export const CallToActionFooterSection = (): JSX.Element => {
             </div>
 
             {/* Image Content - Now extends full height */}
-            <div className="relative w-full lg:block hidden lg:w-[550px] xl:w-[600px] shrink-0 h-80 lg:h-full lg:absolute lg:right-0 lg:top-0 lg:bottom-0 lg:pr-12 xl:pr-24">
+            <div className="relative w-full lg:block hidden lg:w-[550px] xl:w-[600px] shrink-0 h-80 lg:h-full lg:absolute lg:right-0 lg:top-0 lg:bottom-0 lg:pr-12 xl:pr-24 transform-gpu">
               <Image
                 src="/african-american-medical-doctor-man 1.svg"
                 alt="Health facility illustration"
                 fill
                 className="object-contain lg:object-cover lg:object-right"
                 priority
+                sizes="(max-width: 1024px) 0px, 550px"
               />
             </div>
           </div>

@@ -114,7 +114,7 @@ export const FrequentlyAskedQuestionsSection = (): JSX.Element => {
     <section
       className="flex flex-col w-full items-center gap-10 sm:gap-12 md:gap-14 
       px-4 sm:px-8 md:px-[120px] py-12 sm:py-16 md:py-[88px] 
-      relative plusJakarta"
+      relative plusJakarta transform-gpu"
     >
       {/* Header */}
       <header className="flex flex-col items-center gap-3 sm:gap-4 w-full text-center">

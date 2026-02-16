@@ -34,7 +34,7 @@ const features = [
 
 export const FeatureHighlightsSection = (): JSX.Element => {
   return (
-    <section className="plusJakarta flex flex-col items-start px-0 py-12 sm:py-16 md:py-20 lg:py-[90px] w-full bg-shadeswhite overflow-hidden">
+    <section className="plusJakarta flex flex-col items-start px-0 py-12 sm:py-16 md:py-20 lg:py-[90px] w-full bg-shadeswhite overflow-hidden transform-gpu">
       <div className="flex flex-col items-start gap-12 md:gap-16 lg:gap-[90px] px-4 sm:px-8 md:px-12 lg:px-20 xl:px-[90px] py-0 w-full">
         <div className="flex flex-col lg:flex-row items-start gap-8 lg:gap-[90px] w-full">
           <h2 className="flex-1 mt-[-0.90px] font-normal text-[#15181E] text-2xl sm:text-3xl md:text-4xl lg:text-[43.2px] tracking-[-0.86px] leading-tight lg:leading-[55.8px]">
@@ -51,7 +51,7 @@ export const FeatureHighlightsSection = (): JSX.Element => {
               <Card key={index} className="bg-[#d9fffb] rounded-[3.6px] overflow-hidden border-0 w-full">
                 <CardContent className="flex flex-col items-center gap-8 md:gap-[54px] pt-6 md:pt-9 pb-0 px-4 sm:px-6 md:px-[28.8px]">
                   <div className="flex items-start gap-4 md:gap-[28.8px] w-full">
-                    <img className="w-8 h-8 md:w-9 md:h-9 shrink-0" alt="Icon" src={feature.icon} loading="lazy" />
+                    <img className="w-8 h-8 md:w-9 md:h-9 shrink-0" alt="Icon" src={feature.icon} loading="eager" decoding="async" />
                     <div className="flex flex-col items-start gap-2 md:gap-[11.7px] flex-1">
                       <h3 className="w-full mt-[-0.90px] font-semibold text-[#15181E] text-lg sm:text-xl md:text-[21.6px] tracking-[-0.43px] leading-tight md:leading-[27.9px]">
                         {feature.title}
@@ -64,12 +64,12 @@ export const FeatureHighlightsSection = (): JSX.Element => {
                   
                   {/* Mobile/Tablet Image */}
                   <div className="relative w-full h-[300px] sm:h-[350px] md:h-[450px] lg:hidden rounded-t-[3.6px] overflow-hidden">
-                    <img src={feature.mobileImage} alt={feature.title} className="w-full h-full object-cover" loading="lazy" />
+                    <img src={feature.mobileImage} alt={feature.title} className="w-full h-full object-cover" loading="lazy" decoding="async" />
                   </div>
                   
                   {/* Desktop Image */}
                   <div className="relative w-full h-[500px] xl:h-[600px] hidden lg:block rounded-t-[3.6px] overflow-hidden">
-                    <img src={feature.desktopImage} alt={feature.title} className="w-full h-full object-cover" loading="lazy" />
+                    <img src={feature.desktopImage} alt={feature.title} className="w-full h-full object-cover" loading="lazy" decoding="async" />
                   </div>
                 </CardContent>
               </Card>
@@ -81,7 +81,7 @@ export const FeatureHighlightsSection = (): JSX.Element => {
               <Card key={index} className="bg-[#d9fffb] rounded-[3.6px] overflow-hidden border-0 w-full">
                 <CardContent className="flex flex-col items-center gap-8 md:gap-[54px] pt-6 md:pt-9 pb-0 px-4 sm:px-6 md:px-[28.8px]">
                   <div className="flex items-start gap-4 md:gap-[28.8px] w-full">
-                    <img className="w-8 h-8 md:w-9 md:h-9 shrink-0" alt="Icon" src={feature.icon} loading="lazy" />
+                    <img className="w-8 h-8 md:w-9 md:h-9 shrink-0" alt="Icon" src={feature.icon} loading="eager" decoding="async" />
                     <div className="flex flex-col items-start gap-2 md:gap-[11.7px] flex-1">
                       <h3 className="w-full mt-[-0.90px] font-semibold text-[#15181E] text-lg sm:text-xl md:text-[21.6px] tracking-[-0.43px] leading-tight md:leading-[27.9px]">
                         {feature.title}
@@ -94,12 +94,12 @@ export const FeatureHighlightsSection = (): JSX.Element => {
                   
                   {/* Mobile/Tablet Image */}
                   <div className="relative w-full h-[300px] sm:h-[350px] md:h-[450px] lg:hidden rounded-t-[3.6px] overflow-hidden">
-                    <img src={feature.mobileImage} alt={feature.title} className="w-full h-full object-cover" loading="lazy" />
+                    <img src={feature.mobileImage} alt={feature.title} className="w-full h-full object-cover" loading="lazy" decoding="async" />
                   </div>
                   
                   {/* Desktop Image */}
                   <div className="relative w-full h-[500px] xl:h-[600px] hidden lg:block rounded-t-[3.6px] overflow-hidden">
-                    <img src={feature.desktopImage} alt={feature.title} className="w-full h-full object-cover" loading="lazy" />
+                    <img src={feature.desktopImage} alt={feature.title} className="w-full h-full object-cover" loading="lazy" decoding="async" />
                   </div>
                 </CardContent>
               </Card>

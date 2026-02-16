@@ -6,13 +6,12 @@ export interface ProviderApplicationRequest {
   facilityName: string;
   providerType: string;
   state: string;
-  lga?: string;
+  lga: string;
   phoneNumber: string;
   email: string;
   registrationNumber: string;
   documentType: "operatingLicense" | "cacCertificate";
-  documentUrl?: string;
-  documentFile?: File | Blob;
+  documentUrl: string;
   contactFullName: string;
   contactRole: string;
   contactPhoneNumber: string;
@@ -23,6 +22,7 @@ export interface ProviderApplicationRequest {
   closingTime: string;
   agreeToTerms: boolean;
   consentToVerification: boolean;
+  declarationAccepted: boolean;
 }
 
 export type ApplicationStatus = "draft" | "submitted" | "approved" | "rejected";
@@ -81,48 +81,10 @@ export const apiSlice = createApi({
       ProviderApplicationRequest
     >({
       query: (body) => {
-        // If documentFile exists, use FormData, otherwise use JSON
-        if (body.documentFile) {
-          const formData = new FormData();
-          formData.append("facilityName", body.facilityName);
-          formData.append("providerType", body.providerType);
-          formData.append("state", body.state);
-          if (body.lga) formData.append("lga", body.lga);
-          formData.append("phoneNumber", body.phoneNumber);
-          formData.append("email", body.email);
-          formData.append("registrationNumber", body.registrationNumber);
-          formData.append("documentType", body.documentType);
-          formData.append("documentFile", body.documentFile);
-          formData.append("contactFullName", body.contactFullName);
-          formData.append("contactRole", body.contactRole);
-          formData.append("contactPhoneNumber", body.contactPhoneNumber);
-          body.serviceCategories.forEach((cat) => {
-            formData.append("serviceCategories[]", cat);
-          });
-          if (body.serviceDescription) {
-            formData.append("serviceDescription", body.serviceDescription);
-          }
-          body.daysOpen.forEach((day) => {
-            formData.append("daysOpen[]", day);
-          });
-          formData.append("openingTime", body.openingTime);
-          formData.append("closingTime", body.closingTime);
-          formData.append("agreeToTerms", String(body.agreeToTerms));
-          formData.append("consentToVerification", String(body.consentToVerification));
-
-          return {
-            url: "/provider-applications",
-            method: "POST",
-            body: formData,
-          };
-        }
-
-        // JSON payload without file
-        const { documentFile, ...jsonBody } = body;
         return {
           url: "/provider-applications",
           method: "POST",
-          body: jsonBody,
+          body,
         };
       },
       invalidatesTags: ["ProviderApplication"],

@@ -16,19 +16,19 @@ export default function Homepage() {
 
       <main className="w-full flex flex-col">
         <HeroBannerSection />
-        <section id="features">
+        <section id="features" className="transform-gpu">
           <KeyFeaturesSection />
           <FeatureHighlightsSection />
         </section>
         <CustomerTestimonialsSection />
         <CallToActionFooterSection />
-        <section id="faq">
+        <section id="faq" className="transform-gpu">
           <FrequentlyAskedQuestionsSection />
         </section>
-        <section id="contact">
+        <section id="contact" className="transform-gpu">
           <ContactFormSection />
         </section>
-        <section id="join-waiting-list">
+        <section id="join-waiting-list" className="transform-gpu">
           <CallToActionWrapperSection />
         </section>
         <FooterSection />

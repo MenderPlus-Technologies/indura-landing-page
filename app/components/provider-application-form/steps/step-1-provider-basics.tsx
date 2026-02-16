@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Control, Controller, UseFormRegister } from "react-hook-form";
+import { Control, Controller, UseFormRegister, UseFormWatch } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select } from "@/components/ui/select";
@@ -11,6 +11,7 @@ import type { FullFormData } from "../step-schemas";
 interface Step1Props {
   register: UseFormRegister<FullFormData>;
   control: Control<FullFormData>;
+  watch: UseFormWatch<FullFormData>;
   errors: any;
   availableLGAs: string[];
   disabled?: boolean;
@@ -19,10 +20,12 @@ interface Step1Props {
 export const Step1ProviderBasics = ({
   register,
   control,
+  watch,
   errors,
   availableLGAs,
   disabled = false,
 }: Step1Props) => {
+  const watchedState = watch("state");
   return (
     <FormSection title="Provider Basics">
       <div className="flex flex-col gap-1.5">
@@ -104,19 +107,20 @@ export const Step1ProviderBasics = ({
         )}
       </div>
 
-      {availableLGAs.length > 0 && (
-        <div className="flex flex-col gap-1.5">
-          <div className="flex items-center gap-1">
-            <Label htmlFor="lga" className="text-[#444] text-sm md:text-base font-medium">
-              Local Government Area (LGA)
-            </Label>
-          </div>
+      <div className="flex flex-col gap-1.5">
+        <div className="flex items-center gap-1">
+          <Label htmlFor="lga" className="text-[#444] text-sm md:text-base font-medium">
+            Local Government Area (LGA)
+          </Label>
+          <span className="text-red-500">*</span>
+        </div>
+        {availableLGAs.length > 0 ? (
           <Controller
             name="lga"
             control={control}
             render={({ field }) => (
               <Select
-                value={field.value}
+                value={field.value || ""}
                 onChange={field.onChange}
                 placeholder="Select LGA"
                 disabled={disabled}
@@ -129,11 +133,24 @@ export const Step1ProviderBasics = ({
               />
             )}
           />
-          {errors.lga && (
-            <p className="text-red-500 text-xs mt-0.5">{errors.lga.message}</p>
-          )}
-        </div>
-      )}
+        ) : (
+          <Input
+            id="lga"
+            placeholder={watchedState ? "Enter LGA name" : "Select state first"}
+            className="h-12 px-3 py-1.5 bg-white rounded-[10px] border border-[#dfe1e6] w-full transition-all"
+            {...register("lga")}
+            disabled={disabled || !watchedState}
+          />
+        )}
+        {errors.lga && (
+          <p className="text-red-500 text-xs mt-0.5">{errors.lga.message}</p>
+        )}
+        {availableLGAs.length === 0 && watchedState && (
+          <p className="text-xs text-[#666d80] mt-1">
+            Enter your Local Government Area name
+          </p>
+        )}
+      </div>
 
       <div className="flex flex-col gap-1.5">
         <div className="flex items-center gap-1">

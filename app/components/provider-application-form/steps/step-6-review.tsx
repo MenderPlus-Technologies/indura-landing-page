@@ -109,7 +109,18 @@ export const Step6Review = ({ control, watch, errors, disabled = false }: Step6P
               <div>
                 <span className="text-[#666d80]">Document:</span>
                 <span className="ml-2 text-[#0d0d12] font-medium">
-                  {formData.documentUpload?.name || "Not uploaded"}
+                  {formData.documentUrl ? (
+                    <a
+                      href={formData.documentUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#009688] hover:underline"
+                    >
+                      View Document
+                    </a>
+                  ) : (
+                    "Not uploaded"
+                  )}
                 </span>
               </div>
             </div>

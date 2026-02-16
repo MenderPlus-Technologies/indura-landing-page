@@ -87,13 +87,14 @@ export const ContactFormSection = (): JSX.Element => {
       {/* Background Section */}
       <div className="relative w-full flex flex-col items-center gap-6 md:gap-12 pt-14 pb-20 px-0 bg-white rounded-b-4xl overflow-hidden min-h-[600px] md:h-[750px]">
         {/* Background Image */}
-        <div className="absolute inset-0 w-full h-full">
+        <div className="absolute inset-0 w-full h-full transform-gpu">
           <Image
             src="/Container (1).png"
             alt="Background gradient"
             fill
             className="object-cover"
             priority
+            sizes="100vw"
           />
         </div>
 
@@ -128,6 +129,7 @@ export const ContactFormSection = (): JSX.Element => {
         border-[#eceff3] 
         shadow-[0px_2px_8px_-1px_#0d0d120a] 
         bg-white
+        transform-gpu
       ">
         <CardHeader className="pt-8 px-6 md:px-10 pb-0">
           <CardTitle className="font-display-xsmall text-[#0d0d12] text-2xl sm:text-3xl md:text-5xl lg:text-5xl font-medium text-center">

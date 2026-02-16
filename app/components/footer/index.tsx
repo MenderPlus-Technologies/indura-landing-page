@@ -41,7 +41,7 @@ const socialLinks = [
 
 export default function FooterSection() {
   return (
-    <footer className="plusJakarta flex flex-col items-start gap-12 md:gap-16 lg:gap-[72px] px-4 sm:px-8 md:px-16 lg:px-24 xl:px-[120px] py-12 md:py-16 lg:py-20 w-full bg-white border-t border-gray-200">
+    <footer className="plusJakarta flex flex-col items-start gap-12 md:gap-16 lg:gap-[72px] px-4 sm:px-8 md:px-16 lg:px-24 xl:px-[120px] py-12 md:py-16 lg:py-20 w-full bg-white border-t border-gray-200 transform-gpu">
       {/* Main Content */}
       <div className="flex flex-col lg:flex-row items-start justify-between w-full gap-8 lg:gap-4">
         {/* Logo and Description */}

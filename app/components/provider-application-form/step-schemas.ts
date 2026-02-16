@@ -7,7 +7,7 @@ export const step1Schema = z.object({
     errorMap: () => ({ message: "Please select a provider type" }),
   }),
   state: z.string().min(1, "State is required"),
-  lga: z.string().optional(),
+  lga: z.string().min(1, "LGA is required"),
   phoneNumber: z
     .string()
     .min(10, "Phone number must be at least 10 characters")
@@ -21,13 +21,7 @@ export const step2Schema = z.object({
   documentType: z.enum(["operatingLicense", "cacCertificate"], {
     errorMap: () => ({ message: "Please select a document type" }),
   }),
-  documentUpload: z
-    .instanceof(File, { message: "Please upload a document" })
-    .refine((file) => file.size <= 5 * 1024 * 1024, "File size must be less than 5MB")
-    .refine(
-      (file) => ["application/pdf", "image/jpeg", "image/png"].includes(file.type),
-      "File must be PDF, JPEG, or PNG"
-    ),
+  documentUrl: z.string().min(1, "Please upload a document"),
 });
 
 // Step 3: Primary Contact Person

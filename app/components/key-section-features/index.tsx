@@ -24,7 +24,7 @@ const features = [
 
 export const KeyFeaturesSection = (): JSX.Element => {
   return (
-    <section className="gap-8 md:gap-12 lg:gap-16 px-4 sm:px-8 md:px-12 lg:px-20 xl:px-[120px] py-12 sm:py-16 md:py-20 lg:py-[88px] flex flex-col items-center w-full plusJakarta">
+    <section className="gap-8 md:gap-12 lg:gap-16 px-4 sm:px-8 md:px-12 lg:px-20 xl:px-[120px] py-12 sm:py-16 md:py-20 lg:py-[88px] flex flex-col items-center w-full plusJakarta transform-gpu">
       <header className="flex flex-col items-center justify-center gap-3 md:gap-4 w-full max-w-[980px]">
         <p className="font-semibold text-[#009688] text-base md:text-lg text-center tracking-[0] leading-[27.9px]">
           Overview

@@ -14,12 +14,12 @@ export const CallToActionWrapperSection = (): JSX.Element => {
     };
   return (
     <>
-    <section className="flex flex-col items-center plusJakarta gap-12 md:gap-[72px] mt-12 lg:mt-0 pt-8 pb-16 md:pb-[88px] w-full">
+    <section className="flex flex-col items-center plusJakarta gap-12 md:gap-[72px] mt-12 lg:mt-0 pt-8 pb-16 md:pb-[88px] w-full transform-gpu">
       <div
         className="relative flex flex-col items-center justify-center gap-6 md:gap-8 
         px-4 sm:px-8 md:px-[140px] py-16 md:py-20 
         bg-[#009688] w-full overflow-hidden 
-         md:rounded-none"
+         md:rounded-none transform-gpu"
       >
         {/* Background Image */}
         <Image
@@ -29,6 +29,7 @@ export const CallToActionWrapperSection = (): JSX.Element => {
           height={400}
           className="absolute inset-0 w-full h-full object-cover object-center md:object-[center_60%]"
           priority
+          sizes="100vw"
         />
 
         {/* Text Content */}

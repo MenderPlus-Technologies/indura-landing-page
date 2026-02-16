@@ -73,10 +73,11 @@ export const ProviderApplicationForm = (): JSX.Element => {
     if (watchedState) {
       const lgas = getLGAsForState(watchedState);
       setAvailableLGAs(lgas);
-      // Reset LGA if state changes
-      if (lgas.length === 0) {
-        setValue("lga", undefined);
-      }
+      // Reset LGA when state changes to allow fresh selection
+      setValue("lga", "");
+    } else {
+      setAvailableLGAs([]);
+      setValue("lga", "");
     }
   }, [watchedState, setValue]);
 
@@ -143,6 +144,17 @@ export const ProviderApplicationForm = (): JSX.Element => {
 
   const onSubmit = async (data: FullFormData) => {
     try {
+      // Ensure all required fields are present
+      if (!data.lga || data.lga.trim() === "") {
+        toast.error("Please enter or select an LGA");
+        return;
+      }
+
+      if (!data.documentUrl) {
+        toast.error("Please upload a document before submitting");
+        return;
+      }
+
       const payload: ProviderApplicationRequest = {
         facilityName: data.facilityName,
         providerType: data.providerType,
@@ -152,17 +164,19 @@ export const ProviderApplicationForm = (): JSX.Element => {
         email: data.email,
         registrationNumber: data.registrationNumber,
         documentType: data.documentType,
-        documentFile: data.documentUpload,
+        documentUrl: data.documentUrl,
         contactFullName: data.contactFullName,
         contactRole: data.contactRole,
         contactPhoneNumber: data.contactPhoneNumber,
         serviceCategories: data.serviceCategories,
-        serviceDescription: data.serviceDescription,
+        serviceDescription: data.serviceDescription || undefined,
         daysOpen: data.daysOpen,
         openingTime: data.openingTime,
         closingTime: data.closingTime,
         agreeToTerms: data.agreeToTerms,
         consentToVerification: data.consentToVerification,
+        // Backend requires this flag for validation
+        declarationAccepted: true,
       };
 
       const result = await submitApplication(payload).unwrap();
@@ -287,6 +301,7 @@ export const ProviderApplicationForm = (): JSX.Element => {
                         <Step1ProviderBasics
                           register={register}
                           control={control}
+                          watch={watch}
                           errors={errors}
                           availableLGAs={availableLGAs}
                           disabled={isSubmitted}
@@ -296,8 +311,13 @@ export const ProviderApplicationForm = (): JSX.Element => {
                         <Step2LegalVerification
                           register={register}
                           control={control}
+                          watch={watch}
                           errors={errors}
                           disabled={isSubmitted}
+                          onUploadComplete={(url) => {
+                            setValue("documentUrl", url);
+                            trigger("documentUrl");
+                          }}
                         />
                       )}
                       {currentStep === 3 && (

@@ -23,7 +23,7 @@ const appStoreButtons = [
 
 export const HeroBannerSection = (): JSX.Element => {
   return (
-    <section className="flex flex-col w-full items-center plusJakarta pt-12 md:pt-16 lg:pt-24 px-4 sm:px-8 md:px-12 lg:px-20 xl:px-[120px] relative overflow-hidden bg-[url('/Hero.svg')] bg-cover bg-center bg-no-repeat pb-0">
+    <section className="flex flex-col w-full items-center plusJakarta pt-12 md:pt-16 lg:pt-24 px-4 sm:px-8 md:px-12 lg:px-20 xl:px-[120px] relative overflow-hidden bg-[url('/Hero.svg')] bg-cover bg-center bg-no-repeat pb-0 transform-gpu">
       <div className="flex flex-col items-center justify-center gap-6 md:gap-8 lg:gap-10 relative self-stretch w-full flex-[0_0_auto]">
         <div className="flex flex-col items-center justify-center gap-3 md:gap-4 relative self-stretch w-full flex-[0_0_auto]">
           <h1 className="max-w-[1016px] w-full px-4 -mt-px text-[#0d0d12] text-2xl sm:text-3xl md:text-4xl lg:text-[56px] xl:text-[68px] text-center font-medium tracking-[0] leading-[1.3] sm:leading-tight md:leading-[1.2] lg:leading-[85px] relative">
@@ -73,22 +73,24 @@ export const HeroBannerSection = (): JSX.Element => {
 
       <div className="relative w-full max-w-[1432px] h-60 sm:h-[300px] md:h-[390px] lg:h-[600px] xl:h-[588px] -mx-4 sm:-mx-8 md:-mx-12 lg:-mx-20 xl:-mx-[116px] overflow-hidden"></div>
 
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[280px] sm:w-[400px] md:w-[500px] h-auto lg:hidden">
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[280px] sm:w-[400px] md:w-[500px] h-auto lg:hidden transform-gpu">
         <img
           className="w-full h-full object-contain"
           alt="Phone mockups"
           src="https://res.cloudinary.com/dcxdrsgjs/image/upload/v1764952208/Group_1000005655_x3l119.png"
           loading="eager"
+          decoding="async"
         />
       </div>
 
       {/* Desktop Image - Hidden on small/medium screens */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[650px] xl:w-[761px] h-auto hidden lg:block">
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[650px] xl:w-[761px] h-auto hidden lg:block transform-gpu">
         <img
           className="w-full h-full object-contain"
           alt="Phone mockups"
           src="https://res.cloudinary.com/dcxdrsgjs/image/upload/v1764951766/Group_1000005655_mudqsb.svg"
           loading="eager"
+          decoding="async"
         />
       </div>
     </section>
