@@ -22,7 +22,7 @@ const featuresData = [
     icon: "https://c.animaapp.com/mm8xgcl4CkUVff/img/icon-1.svg",
     title: "Pay in Seconds, Ease And Comfort In Your Fingers.",
     description:
-      "Use QR, USSD, or the Idura app to pay at the counter. Providers see instant confirmation; you get instant receipts.",
+      "Use USSD or the Indura app to pay at the counter. Providers see instant confirmation; you get instant receipts.",
     image: "https://c.animaapp.com/mm8xgcl4CkUVff/img/img-2.png",
     delay: "600ms",
   },

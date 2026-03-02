@@ -19,7 +19,7 @@ const features = [
   {
     icon: "/Icon Finance.svg",
     title: "Pay in Seconds, Ease And Comfort In Your Fingers.",
-    description: "Use QR, or the Indura app to pay at the counter. Providers see instant confirmation; you get instant receipts.",
+    description: "Use the Indura app to pay at the counter. Providers see instant confirmation; you get instant receipts.",
     mobileImage: "https://res.cloudinary.com/dcxdrsgjs/image/upload/v1764952853/Img_1_i5pzdx.png",
     desktopImage: "/Img (1).svg", // Add your desktop image URL
   },

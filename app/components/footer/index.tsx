@@ -8,7 +8,6 @@ const featuresLinks = [
   { name: "Health Savings Wallet", href: "#features" },
   { name: "AI Health Assistant", href: "#features" },
   { name: "Find Providers", href: "#providers" },
-  { name: "QR Payments", href: "#payments" },
 ];
 
 // --- UPDATED COMPANY LINKS ---
@@ -59,8 +58,8 @@ export default function FooterSection() {
                 </div>
           <p className="text-gray-500 text-sm sm:text-base leading-relaxed font-medium">
              Indura is the AI-powered health fintech platform that helps you save
-            for care, pay anywhere with QR Code, and verify with a universal
-Other - Health ID built for Africa, online or offline.
+            for care, pay seamlessly at supported facilities, and verify with a universal
+            Health ID built for Africa, online or offline.
           </p>
         </div>
 

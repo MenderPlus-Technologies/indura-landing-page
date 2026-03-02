@@ -14,7 +14,7 @@ const features = [
     alt: "Database",
     title: "Effortless Payments",
     description:
-      "Pay at clinics, pharmacies, and labs via QR, USSD, or in-app with instant confirmations and receipts.",
+      "Pay at clinics, pharmacies, and labs via USSD or in-app with instant confirmations and receipts.",
   },
   {
     icon: "https://c.animaapp.com/mm8xgcl4CkUVff/img/server-01.svg",

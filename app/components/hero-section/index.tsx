@@ -54,7 +54,7 @@ export const HeroSection = (): JSX.Element => {
 
           <p className="max-w-[601px] [font-family:'Plus_Jakarta_Sans',Helvetica] font-normal text-[#666d80] text-base md:text-lg text-center tracking-[0] leading-[27.9px] px-4 translate-y-[-1rem] animate-fade-in [--animation-delay:200ms]">
             Indura is the AI-powered health fintech platform that helps you save
-            for care, pay anywhere QR Code, and verify with a universal Health
+            for care, pay seamlessly at supported facilities, and verify with a universal Health
             ID, built for Africa, online or offline.
           </p>
         </div>
