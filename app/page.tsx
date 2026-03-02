@@ -22,35 +22,27 @@ export default function Homepage() {
     <div className="bg-white w-full min-h-screen relative">
       <NavigationMenuSection />
 
-      {/* <main className="w-full flex flex-col">
-        <HeroBannerSection />
-        <section id="features" className="transform-gpu">
-          <KeyFeaturesSection />
-          <FeatureHighlightsSection />
-        </section>
-        <CustomerTestimonialsSection />
-        <CallToActionFooterSection />
-        <section id="faq" className="transform-gpu">
-          <FrequentlyAskedQuestionsSection />
-        </section>
-        <section id="contact" className="transform-gpu">
-          <ContactFormSection />
-        </section>
-        <section id="join-waiting-list" className="transform-gpu">
-          <CallToActionWrapperSection />
-        </section>
-        <FooterSection />
-      </main> */}
-
       <main className="flex flex-col w-full">
         <HeroSection />
-        <SmartHealthFinanceOverviewSection />
-        <HealthcareFeaturesSection />
+        {/* Features section (linked from navbar/footer) */}
+        <div id="features">
+          <SmartHealthFinanceOverviewSection />
+          <HealthcareFeaturesSection />
+        </div>
         <TestimonialsSection />
         <HealthFacilityActivationSection />
-        <FaqSection />
-        <ContactUsSection />
-        <FinalCtaSection />
+        {/* FAQ section anchor */}
+        <div id="faq">
+          <FaqSection />
+        </div>
+        {/* Contact section anchor */}
+        <div id="contact">
+          <ContactUsSection />
+        </div>
+        {/* Join waiting list / final CTA anchor */}
+        <div id="join-waiting-list">
+          <FinalCtaSection />
+        </div>
       </main>
       <FooterSection />
 
