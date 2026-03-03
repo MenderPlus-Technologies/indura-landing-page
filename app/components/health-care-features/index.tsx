@@ -56,12 +56,12 @@ export const HealthcareFeaturesSection = (): JSX.Element => {
             {featuresData.slice(0, 2).map((feature, index) => (
               <Card
                 key={index}
-                className="bg-[#d9fffb] rounded-[3.6px] overflow-hidden border-0 translate-y-[-1rem] animate-fade-in"
+                className="bg-[#d9fffb] p-0 rounded-[3.6px] overflow-hidden border-0 translate-y-[-1rem] animate-fade-in"
                 style={
                   { "--animation-delay": feature.delay } as CSSProperties
                 }
               >
-                <CardContent className="flex flex-col items-center gap-8 md:gap-[54px] pt-6 md:pt-9 pb-0 px-4 md:px-[28.8px]">
+                <CardContent className="flex p-0 flex-col items-center gap-8 md:gap-[54px] pt-6 md:pt-9 pb-0 px-4 md:px-[28.8px]">
                   <div className="flex items-start gap-4 md:gap-[28.8px] w-full">
                     <img
                       className="w-9 h-9 flex-shrink-0"
@@ -80,11 +80,13 @@ export const HealthcareFeaturesSection = (): JSX.Element => {
                     </div>
                   </div>
 
-                  <img
-                    className="w-full object-contain"
-                    alt="Feature illustration"
-                    src={feature.image}
-                  />
+                  <div className="w-[420px] bg-[#009688] px-9 pt-6 overflow-hidden ">
+                    <img
+                      className="w-[420px] h-[450px] object-cover object-top"
+                      alt="Feature illustration"
+                      src={feature.image}
+                    />
+                  </div>
                 </CardContent>
               </Card>
             ))}
@@ -94,7 +96,7 @@ export const HealthcareFeaturesSection = (): JSX.Element => {
             {featuresData.slice(2, 4).map((feature, index) => (
               <Card
                 key={index}
-                className="bg-[#d9fffb] rounded-[3.6px] overflow-hidden border-0 translate-y-[-1rem] animate-fade-in"
+                className="bg-[#d9fffb] p-0 rounded-[3.6px] overflow-hidden border-0 translate-y-[-1rem] animate-fade-in"
                 style={
                   { "--animation-delay": feature.delay } as CSSProperties
                 }
@@ -118,11 +120,14 @@ export const HealthcareFeaturesSection = (): JSX.Element => {
                     </div>
                   </div>
 
-                  <img
-                    className="w-full object-contain"
-                    alt="Feature illustration"
-                    src={feature.image}
-                  />
+                  <div className="w-[420px]  bg-[#009688] px-9 pt-6 overflow-hidden ">
+
+                    <img
+                      className="w-[420px] h-[450px] object-cover object-top"
+                      alt="Feature illustration"
+                      src={feature.image}
+                    />
+                  </div>
                 </CardContent>
               </Card>
             ))}

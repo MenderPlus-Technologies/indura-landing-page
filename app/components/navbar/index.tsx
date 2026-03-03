@@ -34,21 +34,22 @@ export const NavigationMenuSection = (): JSX.Element => {
   return (
     <>
       <nav className="w-full bg-white shadow-sm border-b border-gray-200 plusJakarta sticky top-0 z-50 transform-gpu will-change-transform">
-        <div className="flex items-center justify-between px-4 sm:px-8 lg:px-10 xl:px-16 max-w-7xl mx-auto">
-          {/* Logo */}
-          <div className="shrink-0 flex items-center w-10 h-20 sm:w-20 sm:h-20 lg:w-20 gap-2">
+        {/* Three main entities: logo, nav links, CTA buttons */}
+        <div className="flex items-center justify-between py-4 px-4 sm:px-8 lg:px-10 xl:px-16  mx-auto">
+          {/* Logo entity */}
+          <div className="flex items-center gap-2">
             <Image
               src="https://res.cloudinary.com/dcxdrsgjs/image/upload/v1762925839/Group_phh0r8.svg"
               alt="Logo"
-              width={500}
-              height={500}
-              className=""
+              width={400}
+              height={400}
+              className="w-10 h-10 sm:w-12 sm:h-12"
               priority
             />
             <p className="text-[#009688] font-bold text-xl">Indura</p>
           </div>
 
-          {/* Desktop Navigation */}
+          {/* Nav links entity (desktop only) */}
           <div className="hidden lg:flex items-center justify-center gap-4 xl:gap-6">
             {navigationItems.map((item, index) => (
               <button
@@ -61,23 +62,23 @@ export const NavigationMenuSection = (): JSX.Element => {
             ))}
           </div>
 
-          {/* Desktop CTA Buttons */}
-          <div className="hidden lg:flex items-center gap-3">
+          {/* Button entity (desktop only) */}
+          <div className="hidden lg:flex items-center justify-end gap-3">
             <Link href="/become-a-provider">
               <Button
                 variant="outline"
-                className="h-10 cursor-pointer gap-2 px-5 border-[#009688] text-[#009688] hover:bg-[#009688] hover:text-white rounded-md transition-colors"
+                className="h-10 cursor-pointer gap-2 px-3 border-[#009688] text-[#009688] hover:bg-[#009688] hover:text-white rounded-md transition-colors"
               >
-                <span className="font-semibold text-sm xl:text-base whitespace-nowrap">
+                <span className="font-semibold text-sm xl:text-sm whitespace-nowrap">
                   Become a Provider
                 </span>
               </Button>
             </Link>
             <Button
               onClick={handleEarlyAccess}
-              className="h-10 cursor-pointer gap-2 px-5 bg-[#009688] hover:bg-[#00897b] rounded-md transition-colors"
+              className="h-10 cursor-pointer gap-2 px-3 bg-[#009688] hover:bg-[#00897b] rounded-md transition-colors"
             >
-              <span className="font-semibold text-white text-sm xl:text-base whitespace-nowrap">
+              <span className="font-semibold text-white text-sm xl:text-sm whitespace-nowrap">
                 Get Early Access
               </span>
             </Button>
