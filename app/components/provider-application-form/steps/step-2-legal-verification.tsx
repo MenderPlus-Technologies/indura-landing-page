@@ -64,7 +64,7 @@ export const Step2LegalVerification = ({
       formData.append("folder", "providers/documents");
 
       const uploadBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "";
-      const response = await fetch(`${uploadBaseUrl}/upload`, {
+      const response = await fetch(`${uploadBaseUrl}/providers/verification-doc`, {
         method: "POST",
         body: formData,
       });
