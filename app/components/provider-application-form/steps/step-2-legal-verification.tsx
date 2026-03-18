@@ -41,6 +41,9 @@ export const Step2LegalVerification = ({
   }, [documentUrl]);
 
   const handleFileUpload = async (file: File) => {
+    // Central place to configure the backend field name for the uploaded file
+    const fileFieldName =
+      process.env.NEXT_PUBLIC_PROVIDER_DOC_FIELD_NAME || "document";
     // Validate file size (max 10MB)
     const maxSize = 10 * 1024 * 1024; // 10MB
     if (file.size > maxSize) {
@@ -60,8 +63,17 @@ export const Step2LegalVerification = ({
 
     try {
       const formData = new FormData();
-      formData.append("file", file);
+      formData.append(fileFieldName, file);
       formData.append("folder", "providers/documents");
+
+      // Helpful debug: inspect FormData before sending
+      // Note: FormData can't be logged directly in all browsers, so iterate entries
+      // eslint-disable-next-line no-console
+      console.log("[Step2LegalVerification] Uploading verification document with FormData:");
+      for (const [key, value] of formData.entries()) {
+        // eslint-disable-next-line no-console
+        console.log(`  ${key}:`, value instanceof File ? `${value.name} (${value.type}, ${value.size} bytes)` : value);
+      }
 
       const uploadBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "";
       const response = await fetch(`${uploadBaseUrl}/providers/verification-doc`, {
@@ -69,40 +81,48 @@ export const Step2LegalVerification = ({
         body: formData,
       });
 
-      const result = await response.json();
-
-      if (!response.ok) {
-        throw new Error(result.error || "Failed to upload file");
+      let result: any = null;
+      try {
+        result = await response.json();
+      } catch {
+        // If the response is not JSON, fall back to a generic error
       }
 
-      if (result.success && (result.public_id || result.publicId || result.url || result.secure_url)) {
-        const publicId: string | undefined = result.public_id || result.publicId;
-        const rawUrl: string | undefined = result.secure_url || result.url;
+      if (!response.ok || !result?.success) {
+        const serverMessage =
+          result?.error?.message ||
+          result?.message ||
+          (typeof result?.error === "string" ? result.error : null);
+
+        const finalMessage =
+          serverMessage ||
+          "Failed to upload file. Please try again or contact support if the issue persists.";
+
+        throw new Error(finalMessage);
+      }
+
+      const returnedUrl: string | undefined =
+        result?.data?.url || result?.url || result?.secure_url;
+
+      // Accept the API's actual success shape:
+      // { success: true, message: "...", data: { url: "..." } }
+      if (result.success && returnedUrl) {
+        const rawUrl: string | undefined = returnedUrl;
 
         let viewUrl: string | undefined;
 
-        // First, try to construct a clean URL from the returned URL + public_id
-        if (publicId && rawUrl) {
-          try {
-            const urlObj = new URL(rawUrl);
-            const segments = urlObj.pathname.split("/");
-            const uploadIndex = segments.indexOf("upload");
+        // Use the returned URL directly, with small fixes for common issues
+        if (rawUrl) {
+          viewUrl = rawUrl;
 
-            if (uploadIndex !== -1) {
-              const basePath = segments.slice(0, uploadIndex + 1).join("/");
-              viewUrl = `${urlObj.protocol}//${urlObj.host}${basePath}/${publicId}`;
-            }
-          } catch {
-            // If parsing fails, we'll fall back to rawUrl handling below
+          // Fix common filename issue (e.g. .pdf.pdf)
+          if (viewUrl.endsWith(".pdf.pdf")) {
+            viewUrl = viewUrl.replace(/\.pdf\.pdf$/, ".pdf");
           }
-        }
 
-        // Fallback: use rawUrl but fix common filename issues (e.g. .pdf.pdf)
-        if (!viewUrl && rawUrl) {
-          if (typeof rawUrl === "string" && rawUrl.endsWith(".pdf.pdf")) {
-            viewUrl = rawUrl.replace(/\.pdf\.pdf$/, ".pdf");
-          } else {
-            viewUrl = rawUrl;
+          // Cloudinary: PDFs often need to be served from /raw/upload/ not /image/upload/
+          if (viewUrl.includes("/image/upload/") && /\.pdf(\?.*)?$/i.test(viewUrl)) {
+            viewUrl = viewUrl.replace("/image/upload/", "/raw/upload/");
           }
         }
 
@@ -114,7 +134,7 @@ export const Step2LegalVerification = ({
         onUploadComplete?.(viewUrl);
         toast.success("Document uploaded successfully");
       } else {
-        throw new Error("Invalid response from server");
+        throw new Error("Upload succeeded but no valid document URL was returned");
       }
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : "Failed to upload file";
@@ -267,16 +287,6 @@ export const Step2LegalVerification = ({
                       </span>
                     </div>
                     <div className="flex items-center gap-2 ml-2">
-                      {documentUrl && (
-                        <a
-                          href={documentUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-sm text-[#009688] hover:text-[#00897b] font-medium"
-                        >
-                          View
-                        </a>
-                      )}
                       <button
                         type="button"
                         onClick={handleRemoveFile}

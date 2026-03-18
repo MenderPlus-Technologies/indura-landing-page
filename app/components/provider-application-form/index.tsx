@@ -6,7 +6,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { useSubmitProviderApplicationMutation } from "@/lib/api/apiSlice";
-import type { ProviderApplicationRequest } from "@/lib/api/apiSlice";
 import { getLGAsForState } from "@/lib/nigerian-states";
 import { Stepper } from "./stepper";
 import { StepNavigation } from "./step-navigation";
@@ -144,42 +143,86 @@ export const ProviderApplicationForm = (): JSX.Element => {
 
   const onSubmit = async (data: FullFormData) => {
     try {
-      // Ensure all required fields are present
-      if (!data.lga || data.lga.trim() === "") {
-        toast.error("Please enter or select an LGA");
-        return;
+      const anyData = data as any;
+
+      // Build multipart/form-data payload to match backend expectations
+      const formData = new FormData();
+
+      // Required fields
+      formData.append("facilityName", data.facilityName);
+      formData.append("facilityType", data.providerType);
+      formData.append("state", data.state);
+      formData.append("contactFullName", data.contactFullName);
+      formData.append("email", data.email);
+      formData.append("contactPhoneNumber", data.contactPhoneNumber);
+      formData.append("declarationAccepted", "true");
+
+      // Optional fields
+      if (data.lga) {
+        formData.append("lga", data.lga);
+      }
+      if (data.registrationNumber) {
+        formData.append("registrationNumber", data.registrationNumber);
+      }
+      if (data.contactRole) {
+        formData.append("contactRole", data.contactRole);
+      }
+      if (Array.isArray(data.serviceCategories) && data.serviceCategories.length > 0) {
+        data.serviceCategories.forEach((category) => {
+          // Values already come from SERVICE_CATEGORIES (consultation, pharmacy, etc.)
+          formData.append("serviceCategories[]", category);
+        });
+      }
+      if (data.serviceDescription) {
+        formData.append("serviceDescription", data.serviceDescription);
+      }
+      if (Array.isArray(data.daysOpen) && data.daysOpen.length > 0) {
+        data.daysOpen.forEach((day) => {
+          formData.append("daysOpen[]", day);
+        });
+      }
+      if (data.openingTime) {
+        formData.append("openingTime", data.openingTime);
+      }
+      if (data.closingTime) {
+        formData.append("closingTime", data.closingTime);
+      }
+      if (data.agreeToTerms) {
+        formData.append("agreeToTerms", "true");
+      }
+      if (data.consentToVerification) {
+        formData.append("consentToVerification", "true");
       }
 
-      if (!data.documentUrl) {
-        toast.error("Please upload a document before submitting");
-        return;
+      // Documents: send actual files if they are available on the form data
+      const documentFieldNames = [
+        "operatingLicense",
+        "cacCertificate",
+        "businessRegistration",
+        "contactPersonId",
+      ] as const;
+
+      documentFieldNames.forEach((fieldName) => {
+        const file = anyData[fieldName];
+        if (file instanceof File) {
+          formData.append(fieldName, file);
+        }
+      });
+
+      // Debug log: inspect FormData entries before sending
+      // eslint-disable-next-line no-console
+      console.log("[ProviderApplicationForm] Submitting provider application with FormData:");
+      for (const [key, value] of formData.entries()) {
+        // eslint-disable-next-line no-console
+        console.log(
+          `  ${key}:`,
+          value instanceof File
+            ? `${value.name} (${value.type}, ${value.size} bytes)`
+            : value
+        );
       }
 
-      const payload: ProviderApplicationRequest = {
-        facilityName: data.facilityName,
-        providerType: data.providerType,
-        state: data.state,
-        lga: data.lga,
-        phoneNumber: data.phoneNumber,
-        email: data.email,
-        registrationNumber: data.registrationNumber,
-        documentType: data.documentType,
-        documentUrl: data.documentUrl,
-        contactFullName: data.contactFullName,
-        contactRole: data.contactRole,
-        contactPhoneNumber: data.contactPhoneNumber,
-        serviceCategories: data.serviceCategories,
-        serviceDescription: data.serviceDescription || undefined,
-        daysOpen: data.daysOpen,
-        openingTime: data.openingTime,
-        closingTime: data.closingTime,
-        agreeToTerms: data.agreeToTerms,
-        consentToVerification: data.consentToVerification,
-        // Backend requires this flag for validation
-        declarationAccepted: true,
-      };
-
-      const result = await submitApplication(payload).unwrap();
+      const result = await submitApplication(formData).unwrap();
 
       const successMessage =
         result.message ||

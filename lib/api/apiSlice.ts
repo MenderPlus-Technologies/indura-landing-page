@@ -2,27 +2,26 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "";
 
+// Kept for reference only; actual request body is sent as FormData
 export interface ProviderApplicationRequest {
   facilityName: string;
-  providerType: string;
+  facilityType: string;
   state: string;
-  lga: string;
-  phoneNumber: string;
-  email: string;
-  registrationNumber: string;
-  documentType: "operatingLicense" | "cacCertificate";
-  documentUrl: string;
+  lga?: string;
   contactFullName: string;
-  contactRole: string;
+  email: string;
   contactPhoneNumber: string;
-  serviceCategories: string[];
-  serviceDescription?: string;
-  daysOpen: string[];
-  openingTime: string;
-  closingTime: string;
-  agreeToTerms: boolean;
-  consentToVerification: boolean;
   declarationAccepted: boolean;
+  // Optional fields the backend may accept
+  registrationNumber?: string;
+  contactRole?: string;
+  serviceCategories?: string[];
+  serviceDescription?: string;
+  daysOpen?: string[];
+  openingTime?: string;
+  closingTime?: string;
+  agreeToTerms?: boolean;
+  consentToVerification?: boolean;
 }
 
 export type ApplicationStatus = "draft" | "submitted" | "approved" | "rejected";
@@ -78,7 +77,7 @@ export const apiSlice = createApi({
   endpoints: (builder) => ({
     submitProviderApplication: builder.mutation<
       ProviderApplicationResponse,
-      ProviderApplicationRequest
+      FormData
     >({
       query: (body) => {
         return {
