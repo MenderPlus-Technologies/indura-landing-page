@@ -5,17 +5,18 @@ import React from "react"; // Added React for JSX
 
 // --- UPDATED FEATURES ---
 const featuresLinks = [
-  { name: "Health Savings Wallet", href: "#features" },
-  { name: "AI Health Assistant", href: "#features" },
-  { name: "Find Providers", href: "#providers" },
+  { name: "Health Savings Wallet", href: "/#features" },
+  { name: "AI Health Assistant", href: "/#features" },
+  { name: "Find Providers", href: "/#providers" },
 ];
 
 // --- UPDATED COMPANY LINKS ---
 const companyLinks = [
   { name: "About Us", href: "/" },
-  { name: "Providers", href: "/" },
-  { name: "FAQs", href: "#faq" }, // Assumes FAQ section has id="faq"
-  { name: "Contact Us", href: "#contact" },
+  { name: "Providers", href: "/become-a-provider" },
+  { name: "FAQs", href: "/#faq" },
+  { name: "Contact Us", href: "/contact" },
+  { name: "Privacy Policy", href: "/privacy-policy" },
 ];
 
 // --- TODO: Update social media URLs ---

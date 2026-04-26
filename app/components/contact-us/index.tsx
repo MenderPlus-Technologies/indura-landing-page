@@ -1,6 +1,5 @@
 "use client";
-import React, { JSX, useState } from "react";
-import Image from "next/image";
+import { JSX, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -9,42 +8,86 @@ import { Label } from "@radix-ui/react-label";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { toast } from "sonner"; 
+import { toast } from "sonner";
+import {
+  Clock,
+  Mail,
+  MessageCircle,
+  ShieldCheck,
+  Sparkles,
+  Stethoscope,
+} from "lucide-react";
 
 const formFields = [
   {
     id: "fullName" as const,
     label: "Full Name",
-    placeholder: "Input your full name",
+    placeholder: "Your full name",
     type: "input",
     required: true,
   },
   {
     id: "email" as const,
     label: "Email",
-    placeholder: "example@email.com",
+    placeholder: "you@example.com",
     type: "input",
     required: true,
   },
   {
     id: "message" as const,
     label: "Message",
-    placeholder: "Input your message",
+    placeholder: "Tell us what you need help with",
     type: "textarea",
     required: true,
   },
 ];
 
 const contactSchema = z.object({
-    fullName: z.string().min(2, "Name must be at least 2 characters"),
-    email: z.string().email("Please enter a valid email"),
-    message: z.string().min(10, "Message must be at least 10 characters"),
-  });
-  
-  type ContactFormData = z.infer<typeof contactSchema>;
+  fullName: z.string().min(2, "Name must be at least 2 characters"),
+  email: z.string().email("Please enter a valid email"),
+  message: z.string().min(10, "Message must be at least 10 characters"),
+});
+
+type ContactFormData = z.infer<typeof contactSchema>;
+
+const contactHighlights = [
+  {
+    icon: MessageCircle,
+    title: "Product support",
+    description: "Questions about savings, payments, Health ID, or your account.",
+  },
+  {
+    icon: Stethoscope,
+    title: "Provider enquiries",
+    description: "Facility onboarding, integrations, transactions, and reconciliation.",
+  },
+  {
+    icon: Sparkles,
+    title: "Partnerships",
+    description: "Press, business, ecosystem, and strategic partnership conversations.",
+  },
+];
+
+const responseDetails = [
+  {
+    icon: Clock,
+    label: "Typical response",
+    value: "Within 24 hours",
+  },
+  {
+    icon: Mail,
+    label: "Best channel",
+    value: "Email follow-up",
+  },
+  {
+    icon: ShieldCheck,
+    label: "Privacy",
+    value: "Handled securely",
+  },
+];
 
 export const ContactUsSection = (): JSX.Element => {
-    const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
     register,
@@ -81,118 +124,162 @@ export const ContactUsSection = (): JSX.Element => {
     }
   };
   return (
-    <section className="relative flex w-full flex-col items-center justify-center gap-11 bg-white px-4 md:px-8 pb-24 md:pb-32 pt-0">
-      {/* Background / heading block */}
-      <div className="relative flex w-full flex-col items-center gap-8 md:gap-12 overflow-hidden rounded-b-[32px] bg-white px-0 pb-16 md:pb-20 pt-12 md:pt-14 min-h-[360px] md:min-h-[460px]">
-        <img
-          className="pointer-events-none absolute -bottom-24 right-[-200px] md:right-[-400px] h-[400px] md:h-[650px] w-[480px] md:w-[708px]"
-          alt="Gradient"
-          src="https://c.animaapp.com/mm8xgcl4CkUVff/img/gradient-2.svg"
-        />
-        <img
-          className="pointer-events-none absolute -bottom-24 left-[-120px] md:left-0 h-[400px] md:h-[650px] w-[520px] md:w-[861px]"
-          alt="Gradient"
-          src="https://c.animaapp.com/mm8xgcl4CkUVff/img/gradient-1.svg"
-        />
+    <section className="relative overflow-hidden bg-[#f7fffd] px-4 py-12 plusJakarta sm:px-8 md:px-12 lg:px-20 lg:py-20 xl:px-[120px]">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute left-[-180px] top-16 h-[420px] w-[420px] rounded-full bg-[#009688]/15 blur-3xl"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute right-[-160px] top-28 h-[520px] w-[520px] rounded-full bg-[#d9fffb] blur-3xl"
+      />
 
-        <div className="relative flex w-full flex-col items-center justify-center gap-4 translate-y-[-1rem] animate-fade-in [--animation-delay:0ms]">
-          <h2 className="relative max-w-[90%] md:max-w-[743px] font-display-medium text-[#0d0d12] font-medium text-2xl sm:text-3xl md:text-5xl lg:text-5xl text-center leading-tight">
-            Let&apos;s Talk
-          </h2>
+      <div className="relative mx-auto flex w-full max-w-[1200px] flex-col gap-10">
+        <div className="grid items-center gap-8 lg:grid-cols-[1fr_520px]">
+          <div className="flex flex-col gap-7">
+            <div className="inline-flex w-fit items-center gap-2 rounded-full border border-[#b7f2ec] bg-white px-4 py-2 text-sm font-semibold text-[#009688] shadow-sm">
+              <MessageCircle className="h-4 w-4" />
+              Contact Indura
+            </div>
 
-          <p className="relative max-w-[90%] md:max-w-[601px] text-[#666d80] text-sm sm:text-base md:text-lg lg:text-xl text-center leading-relaxed">
-            Join us as we explore tailored solutions, discuss industry insights,
-            and collaborate to find the best strategies for your success.
-          </p>
-        </div>
-      </div>
+            <div className="flex flex-col gap-5">
+              <h1 className="max-w-[720px] text-4xl font-medium leading-tight tracking-[-0.04em] text-[#0d0d12] sm:text-5xl lg:text-[64px]">
+                Let&apos;s help you get closer to care.
+              </h1>
+              <p className="max-w-[610px] text-base leading-8 text-[#666d80] sm:text-lg">
+                Whether you are saving for healthcare, joining as a provider, or
+                exploring a partnership, send us a message and the right person
+                on our team will follow up.
+              </p>
+            </div>
 
-      {/* Contact form card */}
-      <Card
-        className="
-        w-full
-        max-w-[90%]
-        sm:max-w-[500px]
-        md:max-w-[600px]
-        lg:w-[600px]
-        -mt-32
-        md:-mt-40
-        rounded-2xl 
-        border 
-        border-solid 
-        border-[#eceff3] 
-        shadow-[0px_2px_8px_-1px_#0d0d120a] 
-        bg-white
-        transform-gpu
-      "
-      >
-        <CardHeader className="pt-8 px-6 md:px-10 pb-0">
-          <CardTitle className="font-display-xsmall text-[#0d0d12] text-2xl sm:text-3xl md:text-5xl lg:text-5xl font-medium text-center">
-            Speak to us
-          </CardTitle>
-        </CardHeader>
+            <div className="grid gap-3 sm:grid-cols-3 lg:max-w-[680px]">
+              {responseDetails.map((detail) => {
+                const Icon = detail.icon;
 
-        <CardContent className="px-6 md:px-10 pb-10 pt-8">
-          <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-start gap-8 w-full">
-            <div className="flex flex-col items-start gap-6 w-full">
-              {formFields.map((field) => (
-                <div key={field.id} className="flex flex-col items-start gap-1 w-full">
-                  <div className="flex items-center w-full gap-1">
-                    <Label
-                      htmlFor={field.id}
-                      className="text-[#444] text-sm md:text-base font-medium"
-                    >
-                      {field.label}
-                    </Label>
-
-                    {field.required && (
-                      <span className="text-red-500">*</span>
-                    )}
+                return (
+                  <div
+                    key={detail.label}
+                    className="rounded-2xl border border-[#dfe1e6] bg-white/80 p-4 shadow-sm backdrop-blur"
+                  >
+                    <Icon className="mb-4 h-5 w-5 text-[#009688]" />
+                    <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#818898]">
+                      {detail.label}
+                    </p>
+                    <p className="mt-2 text-sm font-semibold text-[#0d0d12]">
+                      {detail.value}
+                    </p>
                   </div>
+                );
+              })}
+            </div>
+          </div>
 
-                  <div className="flex flex-col items-start gap-1.5 w-full">
-                    {field.type === "input" ? (
-                      <>
+          <Card className="relative overflow-hidden rounded-[28px] border-[#dfe1e6] bg-white p-0 shadow-[0_24px_80px_rgba(13,13,18,0.10)]">
+            <div
+              aria-hidden="true"
+              className="absolute inset-x-0 top-0 h-2 bg-[linear-gradient(90deg,#009688,#59d7ca,#d9fffb)]"
+            />
+            <CardHeader className="px-6 pb-0 pt-8 md:px-8">
+              <CardTitle className="text-2xl font-semibold leading-tight text-[#0d0d12] md:text-3xl">
+                Send us a message
+              </CardTitle>
+              <p className="text-sm leading-6 text-[#666d80]">
+                Share a few details and we&apos;ll route your enquiry to the
+                right team.
+              </p>
+            </CardHeader>
+
+            <CardContent className="px-6 pb-8 pt-6 md:px-8">
+              <form
+                onSubmit={handleSubmit(onSubmit)}
+                className="flex w-full flex-col items-start gap-6"
+              >
+                <div className="flex w-full flex-col items-start gap-5">
+                  {formFields.map((field) => (
+                    <div
+                      key={field.id}
+                      className="flex w-full flex-col items-start gap-2"
+                    >
+                      <div className="flex w-full items-center gap-1">
+                        <Label
+                          htmlFor={field.id}
+                          className="text-sm font-semibold text-[#0d0d12]"
+                        >
+                          {field.label}
+                        </Label>
+
+                        {field.required && (
+                          <span className="text-red-500">*</span>
+                        )}
+                      </div>
+
+                      {field.type === "input" ? (
                         <Input
                           id={field.id}
                           placeholder={field.placeholder}
-                          className="h-12 px-3 py-1.5 bg-white rounded-[10px] border border-[#dfe1e6] w-full"
+                          aria-invalid={!!errors[field.id]}
+                          className="h-13 rounded-xl border-[#dfe1e6] bg-[#fbfcfc] px-4 text-base shadow-none focus-visible:border-[#009688] focus-visible:ring-[#009688]/20"
                           {...register(field.id)}
                         />
-                        {errors[field.id] && (
-                          <p className="text-red-500 text-xs">{errors[field.id]?.message}</p>
-                        )}
-                      </>
-                    ) : (
-                      <>
+                      ) : (
                         <Textarea
                           id={field.id}
                           placeholder={field.placeholder}
-                          className="h-[132px] px-3 py-1.5 bg-white rounded-[10px] border border-[#dfe1e6] resize-none w-full"
+                          aria-invalid={!!errors[field.id]}
+                          className="min-h-[156px] resize-none rounded-xl border-[#dfe1e6] bg-[#fbfcfc] px-4 py-3 text-base shadow-none focus-visible:border-[#009688] focus-visible:ring-[#009688]/20"
                           {...register(field.id)}
                         />
-                        {errors[field.id] && (
-                          <p className="text-red-500 text-xs">{errors[field.id]?.message}</p>
-                        )}
-                      </>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
+                      )}
 
-            <div className="flex justify-center w-full">
-              <Button 
-                type="submit"
-                disabled={isSubmitting}
-                className="h-[52px] cursor-pointer px-6 bg-[#009688] hover:bg-[#00897b] text-white font-semibold rounded-xl w-full disabled:opacity-50 disabled:cursor-not-allowed"
+                      {errors[field.id] && (
+                        <p className="text-xs font-medium text-red-500">
+                          {errors[field.id]?.message}
+                        </p>
+                      )}
+                    </div>
+                  ))}
+                </div>
+
+                <Button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="h-[52px] w-full cursor-pointer rounded-xl bg-[#009688] px-6 font-semibold text-white hover:bg-[#00897b] disabled:cursor-not-allowed disabled:opacity-50"
+                >
+                  {isSubmitting ? "Sending..." : "Send Message"}
+                </Button>
+              </form>
+            </CardContent>
+          </Card>
+        </div>
+
+        <div className="grid gap-4 md:grid-cols-3">
+          {contactHighlights.map((highlight) => {
+            const Icon = highlight.icon;
+
+            return (
+              <Card
+                key={highlight.title}
+                className="rounded-3xl border-[#dfe1e6] bg-white/90 p-0 shadow-sm"
               >
-                {isSubmitting ? "Sending..." : "Send Message"}
-              </Button>
-            </div>
-          </form>
-        </CardContent>
-      </Card>
+                <CardContent className="flex h-full flex-col gap-5 p-6">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#d9fffb]">
+                    <Icon className="h-6 w-6 text-[#009688]" />
+                  </div>
+                  <div>
+                    <h2 className="text-lg font-semibold text-[#0d0d12]">
+                      {highlight.title}
+                    </h2>
+                    <p className="mt-2 text-sm leading-6 text-[#666d80]">
+                      {highlight.description}
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+            );
+          })}
+        </div>
+      </div>
     </section>
   );
 };

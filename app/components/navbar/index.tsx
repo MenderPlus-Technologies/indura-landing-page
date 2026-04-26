@@ -6,24 +6,16 @@ import { JSX, useState } from "react";
 import { Modal } from "../reusable-modal";
 
 const navigationItems = [
-  { label: "Features", href: "#features" },
-  { label: "FAQ", href: "#faq" },
-  { label: "Join Waiting List", href: "#join-waiting-list" },
-  { label: "Contact Us", href: "#contact" },
+  { label: "Features", href: "/#features" },
+  { label: "FAQ", href: "/#faq" },
+  { label: "Join Waiting List", href: "/#join-waiting-list" },
+  { label: "Contact Us", href: "/contact" },
 ];
 
 export const NavigationMenuSection = (): JSX.Element => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showFormModal, setShowFormModal] = useState(false);
   const [loading, setLoading] = useState(false);
-
-  const handleNavClick = (href: string) => {
-    setIsMobileMenuOpen(false);
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  };
 
   const handleEarlyAccess = () => {
     setLoading(true);
@@ -37,7 +29,10 @@ export const NavigationMenuSection = (): JSX.Element => {
         {/* Three main entities: logo, nav links, CTA buttons */}
         <div className="flex items-center justify-between py-4 px-4 sm:px-8 lg:px-10 xl:px-16  mx-auto">
           {/* Logo entity */}
-          <div className="flex items-center gap-2">
+          <Link
+            href="/"
+            className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+          >
             <Image
               src="https://res.cloudinary.com/dcxdrsgjs/image/upload/v1762925839/Group_phh0r8.svg"
               alt="Logo"
@@ -47,18 +42,18 @@ export const NavigationMenuSection = (): JSX.Element => {
               priority
             />
             <p className="text-[#009688] font-bold text-xl">Indura</p>
-          </div>
+          </Link>
 
           {/* Nav links entity (desktop only) */}
           <div className="hidden lg:flex items-center justify-center gap-4 xl:gap-6">
-            {navigationItems.map((item, index) => (
-              <button
-                key={index}
-                onClick={() => handleNavClick(item.href)}
+            {navigationItems.map((item) => (
+              <Link
+                key={item.label}
+                href={item.href}
                 className="px-3 cursor-pointer py-2 rounded-md font-medium text-[#666d80] text-sm xl:text-base hover:bg-gray-50 hover:text-gray-900 transition-colors whitespace-nowrap"
               >
                 {item.label}
-              </button>
+              </Link>
             ))}
           </div>
 
@@ -112,14 +107,15 @@ export const NavigationMenuSection = (): JSX.Element => {
         {isMobileMenuOpen && (
           <div className="lg:hidden border-t border-[#dfe1e6] bg-white">
             <div className="px-4 py-4 space-y-2">
-              {navigationItems.map((item, index) => (
-                <button
-                  key={index}
-                  onClick={() => handleNavClick(item.href)}
-                  className="w-full text-left px-4 py-3 rounded-lg font-medium text-[#666d80] text-base hover:bg-gray-50 hover:text-gray-900 transition-colors"
+              {navigationItems.map((item) => (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="block w-full px-4 py-3 rounded-lg font-medium text-[#666d80] text-base hover:bg-gray-50 hover:text-gray-900 transition-colors"
                 >
                   {item.label}
-                </button>
+                </Link>
               ))}
               <div className="pt-2 space-y-2">
                 <Link href="/become-a-provider" className="block">
