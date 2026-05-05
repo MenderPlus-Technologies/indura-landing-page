@@ -100,7 +100,6 @@ export const Step2LegalVerification = ({
 
         throw new Error(finalMessage);
       }
-
       const returnedUrl: string | undefined =
         result?.data?.url || result?.url || result?.secure_url;
 
