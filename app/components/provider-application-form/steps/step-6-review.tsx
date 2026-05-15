@@ -3,7 +3,16 @@ import { Control, Controller, UseFormWatch } from "react-hook-form";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { FormSection } from "../form-section";
-import { PROVIDER_TYPES, CONTACT_ROLES, SERVICE_CATEGORIES, DAYS_OF_WEEK } from "../constants";
+import {
+  CONTACT_ROLES,
+  DAYS_OF_WEEK,
+  PROVIDER_TYPES,
+  SERVICE_CATEGORIES,
+} from "../constants";
+import {
+  INDURA_PRIVACY_POLICY_URL,
+  INDURA_TERMS_AND_SERVICE_URL,
+} from "@/lib/indura-legal-links";
 import type { FullFormData } from "../step-schemas";
 
 interface Step6Props {
@@ -214,7 +223,27 @@ export const Step6Review = ({ control, watch, errors, disabled = false }: Step6P
               htmlFor="agreeToTerms"
               className="text-[#444] text-sm md:text-base font-medium cursor-pointer leading-relaxed"
             >
-              I agree to the terms and conditions
+              I agree to the{" "}
+              <a
+                href={INDURA_TERMS_AND_SERVICE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#009688] underline hover:text-[#00897b] font-medium"
+                onClick={(e) => e.stopPropagation()}
+              >
+                Terms and Conditions
+              </a>
+              {" "}
+              and acknowledge the{" "}
+              <a
+                href={INDURA_PRIVACY_POLICY_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#009688] underline hover:text-[#00897b] font-medium"
+                onClick={(e) => e.stopPropagation()}
+              >
+                Privacy Policy
+              </a>
               <span className="text-red-500 ml-1">*</span>
             </Label>
           </div>

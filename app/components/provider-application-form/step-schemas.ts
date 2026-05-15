@@ -59,7 +59,7 @@ export const step5Schema = z
 // Step 6: Agreement & Consent
 export const step6Schema = z.object({
   agreeToTerms: z.boolean().refine((val) => val === true, {
-    message: "You must agree to the terms",
+    message: "You must agree to the Terms and Conditions and acknowledge the Privacy Policy",
   }),
   consentToVerification: z.boolean().refine((val) => val === true, {
     message: "You must consent to verification",
