@@ -5,6 +5,7 @@ export const PROVIDER_TYPES = [
   "Pharmacy",
   "Lab",
   "Gym",
+  "Spa",
   "Others",
 ] as const;
 

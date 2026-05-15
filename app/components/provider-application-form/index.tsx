@@ -1,11 +1,14 @@
 "use client";
-import React, { JSX, useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import React, { JSX, useEffect, useRef, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { useSubmitProviderApplicationMutation } from "@/lib/api/apiSlice";
+import {
+  PROVIDER_REGISTRATION_DEFAULT_COUNTRY,
+  isProviderCountryNigeria,
+} from "@/lib/african-countries";
 import { getLGAsForState } from "@/lib/nigerian-states";
 import { Stepper } from "./stepper";
 import { StepNavigation } from "./step-navigation";
@@ -36,7 +39,6 @@ const STEPS = [
 ];
 
 export const ProviderApplicationForm = (): JSX.Element => {
-  const router = useRouter();
   const [submitApplication, { isLoading }] = useSubmitProviderApplicationMutation();
 
   const [currentStep, setCurrentStep] = useState(1);
@@ -62,23 +64,39 @@ export const ProviderApplicationForm = (): JSX.Element => {
       daysOpen: [],
       agreeToTerms: false,
       consentToVerification: false,
+      country: PROVIDER_REGISTRATION_DEFAULT_COUNTRY,
     },
   });
 
+  const watchedCountry = watch("country");
   const watchedState = watch("state");
+  const prevCountryRef = useRef<string>("");
 
-  // Update LGAs when state changes
   useEffect(() => {
+    const c = watchedCountry?.trim() ?? "";
+    if (prevCountryRef.current !== "" && prevCountryRef.current !== c && c !== "") {
+      setValue("state", "");
+      setValue("lga", "");
+    }
+    if (c !== "") {
+      prevCountryRef.current = c;
+    }
+  }, [watchedCountry, setValue]);
+
+  useEffect(() => {
+    if (!isProviderCountryNigeria(watchedCountry)) {
+      setAvailableLGAs([]);
+      return;
+    }
     if (watchedState) {
       const lgas = getLGAsForState(watchedState);
       setAvailableLGAs(lgas);
-      // Reset LGA when state changes to allow fresh selection
       setValue("lga", "");
     } else {
       setAvailableLGAs([]);
       setValue("lga", "");
     }
-  }, [watchedState, setValue]);
+  }, [watchedCountry, watchedState, setValue]);
 
   // Step validation schemas
   const stepSchemas = [
@@ -91,11 +109,22 @@ export const ProviderApplicationForm = (): JSX.Element => {
   ];
 
   // Validate current step
+  const STEP_ONE_FIELDS: (keyof FullFormData)[] = [
+    "facilityName",
+    "providerType",
+    "country",
+    "state",
+    "lga",
+    "phoneNumber",
+    "email",
+  ];
+
   const validateStep = async (step: number): Promise<boolean> => {
     const schema = stepSchemas[step - 1];
     if (!schema) return true;
 
-    const fieldsToValidate = Object.keys(schema.shape);
+    const fieldsToValidate =
+      step === 1 ? STEP_ONE_FIELDS : (Object.keys(schema.shape) as (keyof FullFormData)[]);
     const isValid = await trigger(fieldsToValidate as any);
     return isValid;
   };
@@ -151,6 +180,10 @@ export const ProviderApplicationForm = (): JSX.Element => {
       // Required fields
       formData.append("facilityName", data.facilityName);
       formData.append("facilityType", data.providerType);
+      formData.append("phoneNumber", data.phoneNumber);
+      if (data.country) {
+        formData.append("country", data.country);
+      }
       formData.append("state", data.state);
       formData.append("contactFullName", data.contactFullName);
       formData.append("email", data.email);
@@ -270,8 +303,8 @@ export const ProviderApplicationForm = (): JSX.Element => {
             Become an Indura Provider
           </h1>
           <p className="text-base sm:text-lg md:text-xl text-[#666d80] max-w-2xl leading-relaxed mb-2">
-            Apply to join Indura and start accepting health savings payments from
-            customers near you.
+            Apply to join Indura and accept health savings payments across Africa —
+            starting with Nigeria, with regional onboarding as we expand.
           </p>
           <p className="text-sm sm:text-base text-[#666d80] opacity-75">
             This takes about 2–3 minutes.

@@ -11,8 +11,11 @@ export interface ProviderApplicationRequest {
   contactFullName: string;
   email: string;
   contactPhoneNumber: string;
+  /** Facility / organisation phone (provider basics) */
+  phoneNumber: string;
   declarationAccepted: boolean;
   // Optional fields the backend may accept
+  country?: string;
   registrationNumber?: string;
   contactRole?: string;
   serviceCategories?: string[];

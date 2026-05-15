@@ -1,19 +1,35 @@
 import * as z from "zod";
 
 // Step 1: Provider Basics
-export const step1Schema = z.object({
-  facilityName: z.string().min(2, "Facility name must be at least 2 characters"),
-  providerType: z.enum(["Clinic", "Hospital", "Pharmacy", "Lab", "Gym", "Others"], {
-    message: "Please select a provider type",
-  }),
-  state: z.string().min(1, "State is required"),
-  lga: z.string().min(1, "LGA is required"),
-  phoneNumber: z
-    .string()
-    .min(10, "Phone number must be at least 10 characters")
-    .regex(/^[0-9+\-\s()]+$/, "Please enter a valid phone number"),
-  email: z.string().email("Please enter a valid email address"),
-});
+export const step1Schema = z
+  .object({
+    facilityName: z.string().min(2, "Facility name must be at least 2 characters"),
+    providerType: z.enum(
+      ["Clinic", "Hospital", "Pharmacy", "Lab", "Gym", "Spa", "Others"],
+      {
+        message: "Please select a provider type",
+      },
+    ),
+    country: z.string().min(1, "Country is required"),
+    state: z.string().min(1, "State / region is required"),
+    lga: z.string().optional(),
+    phoneNumber: z
+      .string()
+      .min(10, "Phone number must be at least 10 characters")
+      .regex(/^[0-9+\-\s()]+$/, "Please enter a valid phone number"),
+    email: z.string().email("Please enter a valid email address"),
+  })
+  .superRefine((data, ctx) => {
+    const isNigeria = data.country === "Nigeria";
+    const lgaTrimmed = data.lga?.trim() ?? "";
+    if (isNigeria && lgaTrimmed.length === 0) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Local Government Area is required for Nigeria",
+        path: ["lga"],
+      });
+    }
+  });
 
 // Step 2: Legal & Verification
 export const step2Schema = z.object({

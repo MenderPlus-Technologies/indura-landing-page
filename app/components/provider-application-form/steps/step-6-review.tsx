@@ -73,17 +73,35 @@ export const Step6Review = ({ control, watch, errors, disabled = false }: Step6P
                 </span>
               </div>
               <div>
-                <span className="text-[#666d80]">State:</span>
+                <span className="text-[#666d80]">Country:</span>
+                <span className="ml-2 text-[#0d0d12] font-medium">
+                  {formData.country || "Not provided"}
+                </span>
+              </div>
+              <div>
+                <span className="text-[#666d80]">
+                  {formData.country === "Nigeria" ? "State:" : "State / region:"}
+                </span>
                 <span className="ml-2 text-[#0d0d12] font-medium">
                   {formData.state || "Not provided"}
                 </span>
               </div>
-              {formData.lga && (
+              {formData.country === "Nigeria" && (
                 <div>
-                  <span className="text-[#666d80]">LGA:</span>
-                  <span className="ml-2 text-[#0d0d12] font-medium">{formData.lga}</span>
+                  <span className="text-[#666d80]">Local Government Area (LGA):</span>
+                  <span className="ml-2 text-[#0d0d12] font-medium">
+                    {(formData.lga || "").trim() || "Not provided"}
+                  </span>
                 </div>
               )}
+              {formData.country &&
+                formData.country !== "Nigeria" &&
+                (formData.lga || "").trim() !== "" && (
+                  <div>
+                    <span className="text-[#666d80]">City / district:</span>
+                    <span className="ml-2 text-[#0d0d12] font-medium">{formData.lga?.trim()}</span>
+                  </div>
+                )}
               <div>
                 <span className="text-[#666d80]">Phone:</span>
                 <span className="ml-2 text-[#0d0d12] font-medium">
