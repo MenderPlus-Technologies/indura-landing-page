@@ -172,8 +172,6 @@ export const ProviderApplicationForm = (): JSX.Element => {
 
   const onSubmit = async (data: FullFormData) => {
     try {
-      const anyData = data as any;
-
       // Build multipart/form-data payload to match backend expectations
       const formData = new FormData();
 
@@ -227,20 +225,14 @@ export const ProviderApplicationForm = (): JSX.Element => {
         formData.append("consentToVerification", "true");
       }
 
-      // Documents: send actual files if they are available on the form data
-      const documentFieldNames = [
-        "operatingLicense",
-        "cacCertificate",
-        "businessRegistration",
-        "contactPersonId",
-      ] as const;
-
-      documentFieldNames.forEach((fieldName) => {
-        const file = anyData[fieldName];
-        if (file instanceof File) {
-          formData.append(fieldName, file);
+      // Verification doc: uploaded separately to /providers/verification-doc; pass URL only
+      if (data.documentUrl?.trim()) {
+        if (data.documentType === "operatingLicense") {
+          formData.append("operatingLicenseUrl", data.documentUrl.trim());
+        } else if (data.documentType === "cacCertificate") {
+          formData.append("cacCertificateUrl", data.documentUrl.trim());
         }
-      });
+      }
 
       // Debug log: inspect FormData entries before sending
       // eslint-disable-next-line no-console

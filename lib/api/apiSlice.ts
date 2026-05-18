@@ -17,6 +17,9 @@ export interface ProviderApplicationRequest {
   // Optional fields the backend may accept
   country?: string;
   registrationNumber?: string;
+  documentType?: "operatingLicense" | "cacCertificate";
+  operatingLicenseUrl?: string;
+  cacCertificateUrl?: string;
   contactRole?: string;
   serviceCategories?: string[];
   serviceDescription?: string;
