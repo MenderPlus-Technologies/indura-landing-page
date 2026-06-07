@@ -95,6 +95,33 @@ interface FaqItem {
     },
     {
       id: "item-6",
+      question: "I'm an NGO, foundation, or donor. How does the institutional portal work?",
+      answer: (
+        <>
+          <p>
+            Indura&apos;s Institutional Portal is a B2B dashboard for organisations
+            disbursing healthcare funds in Africa — including foundations, NGOs,
+            development partners, insurers, and government agencies.
+          </p>
+          <p className="mt-4">
+            The portal covers programme management, beneficiary enrolment, fund
+            disbursement, live analytics, compliance reporting, and treasury
+            management. The dashboard is currently in active development as we
+            onboard our first institutional partners.
+          </p>
+          <p className="mt-4">
+            Visit our{" "}
+            <a href="/institutional-portal" className="text-[#009688] font-semibold hover:underline">
+              Institutional Portal page
+            </a>{" "}
+            to learn more, or email{" "}
+            <strong>hello@menderplus.com</strong> to discuss partnership.
+          </p>
+        </>
+      ),
+    },
+    {
+      id: "item-7",
       question: "I'm a provider. How do I sign up?",
      answer: (
         <>
