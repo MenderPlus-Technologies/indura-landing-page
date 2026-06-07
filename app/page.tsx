@@ -4,7 +4,6 @@ import FooterSection from "./components/footer";
 import { FaqSection } from "./components/frequently-asked-question";
 import { HealthcareFeaturesSection } from "./components/health-care-features";
 import { HealthFacilityActivationSection } from "./components/health-facility-activation";
-import { InstitutionalPartnersSection } from "./components/institutional-partners";
 import { HeroSection } from "./components/hero-section";
 import { NavigationMenuSection } from "./components/navbar";
 import { SmartHealthFinanceOverviewSection } from "./components/smart-health-section";
@@ -26,7 +25,6 @@ export default function Homepage() {
         <div id="providers">
           <HealthFacilityActivationSection />
         </div>
-        <InstitutionalPartnersSection />
         <ContactCtaSection />
         {/* FAQ section anchor */}
         <div id="faq">

@@ -64,7 +64,7 @@ const contactHighlights = [
   {
     icon: Sparkles,
     title: "Partnerships",
-    description: "Institutional portal access, facility onboarding, press, and strategic partnerships.",
+    description: "Press, business, ecosystem, and strategic partnership conversations.",
   },
 ];
 

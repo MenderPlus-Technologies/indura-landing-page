@@ -16,7 +16,6 @@ const featuresLinks = [
 const companyLinks = [
   { name: "About Us", href: "/" },
   { name: "Providers", href: "/become-a-provider" },
-  { name: "Institutional Portal", href: "/institutional-portal" },
   { name: "FAQs", href: "/#faq" },
   { name: "Contact Us", href: "/contact" },
 ];

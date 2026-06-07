@@ -7,7 +7,6 @@ import { Modal } from "../reusable-modal";
 
 const navigationItems = [
   { label: "Features", href: "/#features" },
-  { label: "Institutional Portal", href: "/institutional-portal" },
   { label: "FAQ", href: "/#faq" },
   { label: "Join Waiting List", href: "/#join-waiting-list" },
   { label: "Contact Us", href: "/contact" },

@@ -9,7 +9,7 @@ const contactOptions = [
   },
   {
     title: "Partnerships",
-    description: "Facility onboarding, institutional portal access, integrations, and provider payouts.",
+    description: "Talk to us about facility onboarding, integrations, and provider payouts.",
   },
   {
     title: "General Enquiries",
