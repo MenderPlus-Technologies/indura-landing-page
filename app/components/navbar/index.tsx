@@ -1,85 +1,66 @@
 "use client";
+
 import { Button } from "@/components/ui/button";
+import { MainNavLink } from "@/app/components/main-nav-link";
+import { mainNavItems } from "@/lib/site-config";
 import Image from "next/image";
 import Link from "next/link";
 import { JSX, useState } from "react";
-import { Modal } from "../reusable-modal";
-
-const navigationItems = [
-  { label: "Features", href: "/#features" },
-  { label: "FAQ", href: "/#faq" },
-  { label: "Join Waiting List", href: "/#join-waiting-list" },
-  { label: "Contact Us", href: "/contact" },
-];
+import { WaitlistModal } from "../waitlist-modal";
 
 export const NavigationMenuSection = (): JSX.Element => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [showFormModal, setShowFormModal] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [showWaitlist, setShowWaitlist] = useState(false);
 
-  const handleEarlyAccess = () => {
-    setLoading(true);
-    setShowFormModal(true);
+  const handleGetStarted = () => {
+    setShowWaitlist(true);
     setIsMobileMenuOpen(false);
   };
 
   return (
     <>
       <nav className="w-full bg-white shadow-sm border-b border-gray-200 plusJakarta sticky top-0 z-50 transform-gpu will-change-transform">
-        {/* Three main entities: logo, nav links, CTA buttons */}
-        <div className="flex items-center justify-between py-4 px-4 sm:px-8 lg:px-10 xl:px-16  mx-auto">
-          {/* Logo entity */}
+        <div className="flex items-center justify-between py-4 px-4 sm:px-8 lg:px-10 xl:px-16 mx-auto max-w-7xl">
           <Link
             href="/"
-            className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+            className="flex items-center gap-2 hover:opacity-80 transition-opacity shrink-0"
           >
             <Image
               src="https://res.cloudinary.com/dcxdrsgjs/image/upload/v1762925839/Group_phh0r8.svg"
-              alt="Logo"
-              width={400}
-              height={400}
-              className="w-10 h-10 sm:w-12 sm:h-12"
+              alt="Indura Health"
+              width={40}
+              height={40}
+              className="w-10 h-10 sm:w-11 sm:h-11"
               priority
             />
-            <p className="text-[#009688] font-bold text-xl">Indura</p>
+            <span className="text-[#009688] font-bold text-lg sm:text-xl">
+              Indura
+            </span>
           </Link>
 
-          {/* Nav links entity (desktop only) */}
-          <div className="hidden lg:flex items-center justify-center gap-4 xl:gap-6">
-            {navigationItems.map((item) => (
-              <Link
+          <div className="hidden xl:flex items-center justify-center gap-5">
+            {mainNavItems.map((item) => (
+              <MainNavLink
                 key={item.label}
                 href={item.href}
-                className="px-3 cursor-pointer py-2 rounded-md font-medium text-[#666d80] text-sm xl:text-base hover:bg-gray-50 hover:text-gray-900 transition-colors whitespace-nowrap"
+                className="px-2 py-2 font-medium text-[#666d80] text-sm hover:text-[#009688] transition-colors whitespace-nowrap"
               >
                 {item.label}
-              </Link>
+              </MainNavLink>
             ))}
           </div>
 
-          {/* Button entity (desktop only) */}
-          <div className="hidden lg:flex items-center justify-end gap-3">
-            <Link href="/become-a-provider">
-              <Button
-                variant="outline"
-                className="h-10 cursor-pointer gap-2 px-3 border-[#009688] text-[#009688] hover:bg-[#009688] hover:text-white rounded-md transition-colors"
-              >
-                <span className="font-semibold text-sm xl:text-sm whitespace-nowrap">
-                  Become a Provider
-                </span>
-              </Button>
-            </Link>
+          <div className="hidden lg:flex items-center justify-end shrink-0">
             <Button
-              onClick={handleEarlyAccess}
-              className="h-10 cursor-pointer gap-2 px-3 bg-[#009688] hover:bg-[#00897b] rounded-md transition-colors"
+              onClick={handleGetStarted}
+              className="h-10 cursor-pointer px-4 bg-[#009688] hover:bg-[#00897b] rounded-md transition-colors"
             >
-              <span className="font-semibold text-white text-sm xl:text-sm whitespace-nowrap">
-                Get Early Access
+              <span className="font-semibold text-white text-sm whitespace-nowrap">
+                Get Started
               </span>
             </Button>
           </div>
 
-          {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="lg:hidden p-2 rounded-md hover:bg-gray-50 transition-colors"
@@ -103,38 +84,26 @@ export const NavigationMenuSection = (): JSX.Element => {
           </button>
         </div>
 
-        {/* Mobile Menu */}
         {isMobileMenuOpen && (
           <div className="lg:hidden border-t border-[#dfe1e6] bg-white">
-            <div className="px-4 py-4 space-y-2">
-              {navigationItems.map((item) => (
-                <Link
+            <div className="px-4 py-4 space-y-1 max-h-[70vh] overflow-y-auto">
+              {mainNavItems.map((item) => (
+                <MainNavLink
                   key={item.label}
                   href={item.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="block w-full px-4 py-3 rounded-lg font-medium text-[#666d80] text-base hover:bg-gray-50 hover:text-gray-900 transition-colors"
+                  onNavigate={() => setIsMobileMenuOpen(false)}
+                  className="block w-full px-4 py-3 rounded-lg font-medium text-[#666d80] text-base hover:bg-gray-50 hover:text-[#009688] transition-colors"
                 >
                   {item.label}
-                </Link>
+                </MainNavLink>
               ))}
-              <div className="pt-2 space-y-2">
-                <Link href="/become-a-provider" className="block">
-                  <Button
-                    variant="outline"
-                    className="w-full h-12 gap-2 px-4 py-3 border-[#009688] text-[#009688] hover:bg-[#009688] hover:text-white rounded-lg transition-colors"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    <span className="font-semibold text-base">
-                      Become a Provider
-                    </span>
-                  </Button>
-                </Link>
+              <div className="pt-3 border-t border-[#eceff3] mt-2">
                 <Button
-                  onClick={handleEarlyAccess}
-                  className="w-full h-12 gap-2 px-4 py-3 bg-[#009688] hover:bg-[#00897b] rounded-lg transition-colors"
+                  onClick={handleGetStarted}
+                  className="w-full h-12 bg-[#009688] hover:bg-[#00897b] rounded-lg transition-colors"
                 >
                   <span className="font-semibold text-white text-base">
-                    Get Early Access
+                    Get Started
                   </span>
                 </Button>
               </div>
@@ -142,43 +111,8 @@ export const NavigationMenuSection = (): JSX.Element => {
           </div>
         )}
       </nav>
-      <Modal
-        isOpen={showFormModal}
-        onClose={() => setShowFormModal(false)}
-        maxWidth="2xl"
-      >
-        <div className="relative w-full h-[600px]">
-          {/* Loader overlay */}
-          {loading && (
-            <div className="absolute inset-0 flex items-center justify-center bg-white/80 z-10">
-              <div className="animate-spin rounded-full h-12 w-12 border-4 border-t-transparent border-[#009688]" />
-            </div>
-          )}
 
-          <iframe
-            src="https://forms.gle/jZpee78KBPccwMBp6"
-            width="100%"
-            height="600"
-            frameBorder="0"
-            marginHeight={0}
-            marginWidth={0}
-            className="rounded-b-lg"
-            onLoad={() => setLoading(false)}
-            loading="lazy"
-          ></iframe>
-        </div>
-
-        <div className="p-4 text-center border-t bg-gray-50">
-          <button
-            onClick={() =>
-              window.open("https://forms.gle/jZpee78KBPccwMBp6", "_blank")
-            }
-            className="text-[#009688] hover:underline text-sm font-medium"
-          >
-            Prefer to open in a new tab? →
-          </button>
-        </div>
-      </Modal>
+      <WaitlistModal isOpen={showWaitlist} onClose={() => setShowWaitlist(false)} />
     </>
   );
 };

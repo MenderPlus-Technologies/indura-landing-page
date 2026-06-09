@@ -20,9 +20,15 @@ const plusJakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Indura",
-  description: "",
-  icons:"https://res.cloudinary.com/dcxdrsgjs/image/upload/v1762925839/Group_phh0r8.svg"
+  title: "Indura Health | The Financial OS for African Healthcare",
+  description:
+    "The dedicated financial infrastructure connecting patients, health providers, and global donors on one secure, zero-leakage ledger.",
+  icons: "https://res.cloudinary.com/dcxdrsgjs/image/upload/v1762925839/Group_phh0r8.svg",
+  openGraph: {
+    title: "Indura Health | Healthcare OS",
+    description:
+      "The dedicated financial infrastructure connecting patients, health providers, and global donors on one secure, zero-leakage ledger.",
+  },
 };
 
 export default function RootLayout({

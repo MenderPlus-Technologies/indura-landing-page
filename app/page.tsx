@@ -1,42 +1,37 @@
+import { BlogSection } from "./components/blog-section";
 import { ContactCtaSection } from "./components/contact-cta";
+import { EcosystemSection } from "./components/ecosystem-section";
+import { FaqSection } from "./components/frequently-asked-question";
 import { FinalCtaSection } from "./components/final-cta";
 import FooterSection from "./components/footer";
-import { FaqSection } from "./components/frequently-asked-question";
-import { HealthcareFeaturesSection } from "./components/health-care-features";
-import { HealthFacilityActivationSection } from "./components/health-facility-activation";
-import { HeroSection } from "./components/hero-section";
+import { HomePageShell } from "./components/home-page-shell";
+import { InfrastructureSection } from "./components/infrastructure-section";
 import { NavigationMenuSection } from "./components/navbar";
-import { SmartHealthFinanceOverviewSection } from "./components/smart-health-section";
-import { TestimonialsSection } from "./components/testimonial-section";
+import { RevampHeroSection } from "./components/revamp-hero";
+import { TrustBannerSection } from "./components/trust-banner";
+import { showBlogSection } from "@/lib/feature-flags";
 
 export default function Homepage() {
   return (
-    <div className="bg-white w-full min-h-screen relative">
-      <NavigationMenuSection />
+    <HomePageShell>
+      <div className="bg-white w-full min-h-screen relative">
+        <NavigationMenuSection />
 
-      <main className="flex flex-col w-full">
-        <HeroSection />
-        {/* Features section (linked from navbar/footer) */}
-        <div id="features">
-          <SmartHealthFinanceOverviewSection />
-          <HealthcareFeaturesSection />
-        </div>
-        <TestimonialsSection />
-        <div id="providers">
-          <HealthFacilityActivationSection />
-        </div>
-        <ContactCtaSection />
-        {/* FAQ section anchor */}
-        <div id="faq">
-          <FaqSection />
-        </div>
-        {/* Join waiting list / final CTA anchor */}
-        <div id="join-waiting-list">
+        <main className="flex flex-col w-full">
+          <RevampHeroSection />
+          <TrustBannerSection />
+          <EcosystemSection />
+          <InfrastructureSection />
+          {showBlogSection && <BlogSection />}
+          <ContactCtaSection />
+          <div id="faq">
+            <FaqSection />
+          </div>
           <FinalCtaSection />
-        </div>
-      </main>
-      <FooterSection />
+        </main>
 
-    </div>
+        <FooterSection />
+      </div>
+    </HomePageShell>
   );
 }

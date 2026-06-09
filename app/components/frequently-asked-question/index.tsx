@@ -141,13 +141,13 @@ interface FaqItem {
               className="bg-white rounded-xl border border-solid border-[#eceff3] shadow-[0px_2px_8px_-1px_#0d0d120a] px-4 sm:px-6 transition-colors hover:border-[#d0d5dd]"
             >
               <AccordionTrigger className="py-4 sm:py-5 hover:no-underline [&[data-state=open]>svg]:rotate-180">
-                <span className="flex-1 text-left [font-family:'Plus_Jakarta_Sans',Helvetica] text-base sm:text-lg md:text-2xl tracking-[0] leading-snug md:leading-[31.2px] font-medium text-greyscale-900">
+                <span className="flex-1 text-left [font-family:'Plus_Jakarta_Sans',Helvetica] text-sm sm:text-base md:text-lg tracking-[0] leading-snug font-medium text-greyscale-900">
                   {faq.question}
                 </span>
               </AccordionTrigger>
               {faq.answer && (
                 <AccordionContent className="pb-5 sm:pb-6 pt-0">
-                  <div className="[font-family:'Plus_Jakarta_Sans',Helvetica] font-normal text-greyscale-500 text-sm sm:text-base md:text-lg tracking-[0] leading-relaxed md:leading-[27.9px] space-y-3">
+                  <div className="[font-family:'Plus_Jakarta_Sans',Helvetica] font-normal text-greyscale-500 text-sm sm:text-base tracking-[0] leading-relaxed space-y-3">
                     {faq.answer}
                   </div>
                 </AccordionContent>

@@ -170,7 +170,7 @@
 }
 
 /* Optimize scroll performance for sections - use content-visibility for better performance */
-section:not(:first-of-type) {
+section:not(:first-of-type):not(.ecosystem-section) {
   content-visibility: auto;
   contain-intrinsic-size: auto 500px;
 }
@@ -180,8 +180,42 @@ img[loading="lazy"] {
   content-visibility: auto;
 }
 
-/* Optimize sticky elements */
-.sticky {
-  will-change: transform;
-  transform: translateZ(0);
+/* Sticky navbar anchor offset is handled via scroll-mt on cards */
+@keyframes ecosystem-card-pop {
+  0% {
+    transform: translateY(0) scale(1);
+    box-shadow: 0 2px 8px -1px rgba(13, 13, 18, 0.04);
+  }
+  45% {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px -8px rgba(0, 150, 136, 0.25);
+  }
+  100% {
+    transform: translateY(-5px) scale(1);
+    box-shadow: 0 16px 32px -8px rgba(0, 150, 136, 0.18);
+  }
+}
+
+.ecosystem-card--pop {
+  transition: none !important;
+  animation: ecosystem-card-pop 0.65s ease forwards;
+  border-color: rgba(0, 150, 136, 0.35) !important;
+  z-index: 2;
+  position: relative;
+}
+
+.ecosystem-card--active {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 32px -8px rgba(0, 150, 136, 0.18);
+  border-color: rgba(0, 150, 136, 0.35);
+  z-index: 1;
+  position: relative;
+}
+
+.ecosystem-card:target {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 32px -8px rgba(0, 150, 136, 0.18);
+  border-color: rgba(0, 150, 136, 0.35);
+  z-index: 1;
+  position: relative;
 }
