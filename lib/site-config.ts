@@ -2,7 +2,6 @@ import {
   INDURA_PRIVACY_POLICY_URL,
   INDURA_TERMS_AND_SERVICE_URL,
 } from "@/lib/indura-legal-links";
-import { showBlogSection } from "@/lib/feature-flags";
 
 export const WAITLIST_FORM_URL = "https://forms.gle/jZpee78KBPccwMBp6";
 
@@ -18,17 +17,13 @@ export const BRAND = {
   cardBorder: "#eceff3",
 } as const;
 
-const allMainNavItems = [
+export const mainNavItems = [
   { label: "For The Consumer", href: "/#consumer" },
   { label: "Health Providers", href: "/#providers" },
   { label: "Institutional Desk", href: "/#institutions" },
   { label: "Blog", href: "/#blog" },
   { label: "Contact Us", href: "/contact" },
 ];
-
-export const mainNavItems = showBlogSection
-  ? allMainNavItems
-  : allMainNavItems.filter((item) => item.href !== "/#blog");
 
 export const socialLinks = [
   {
@@ -49,15 +44,11 @@ export const footerPlatformLinks = [
   { name: "Institutional Dashboard", href: "/#institutions" },
 ];
 
-const allFooterResourceLinks = [
+export const footerResourceLinks = [
   { name: "Blog & Updates", href: "/#blog" },
   { name: "FAQs", href: "/#faq" },
   { name: "Contact Us", href: "/contact" },
 ];
-
-export const footerResourceLinks = showBlogSection
-  ? allFooterResourceLinks
-  : allFooterResourceLinks.filter((item) => item.href !== "/#blog");
 
 export const footerCompanyLinks = [
   { name: "Become a Provider", href: "/become-a-provider" },
