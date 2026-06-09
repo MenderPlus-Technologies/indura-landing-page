@@ -142,24 +142,29 @@ export const infrastructureFeatures = [
 
 export const blogPosts = [
   {
-    category: "Company News",
-    title: "Building the Healthcare OS for Africa",
+    category: "Healthcare Fintech",
+    title:
+      "How Healthcare Fintech Platforms Like Mender Plus Are Transforming Patient Payments in Africa",
     description:
-      "Why we are shifting from traditional fintech to a dedicated health-intent ledger.",
+      "Mender Plus is integrating technology, financial services, and healthcare delivery to make medical payments instant, transparent, and accessible.",
+    href: "https://medium.com/@DavidBobaii/how-healthcare-fintech-platforms-like-mender-plus-are-transforming-patient-payments-and-services-in-e9e39c9eb5b1",
     icon: "newspaper" as const,
   },
   {
-    category: "Health Providers",
-    title: "Solving the 60-Day Payout Delay",
+    category: "Our Mission",
+    title: "When It Matters Most: The Mission Behind Mender Plus",
     description:
-      "How T+0 instant settlement is keeping local health facilities operational.",
-    icon: "stethoscope" as const,
+      "Born in crisis, Mender Plus exists for the moments when seconds count and help must be fast, reliable, and human.",
+    href: "https://medium.com/@DavidBobaii/when-it-matters-most-the-mission-behind-mender-plus-da2a3132b3b1",
+    icon: "heart" as const,
   },
   {
-    category: "Product Update",
-    title: "The Security Behind Hard-Locked Intent",
+    category: "Founder Story",
+    title:
+      "The Story Behind Mender Plus: Turning a Personal Experience into a Lifesaving Solution",
     description:
-      "A deep dive into our cryptographic ledger and how it prevents capital leakage.",
-    icon: "shield-check" as const,
+      "How a family emergency became the mission behind Indura Health—a dedicated savings wallet that connects patients directly to care.",
+    href: "https://medium.com/@DavidBobaii/the-story-behind-mender-plus-turning-a-personal-experience-into-a-lifesaving-solution-david-bobai-ba9751b66948",
+    icon: "book" as const,
   },
 ];
