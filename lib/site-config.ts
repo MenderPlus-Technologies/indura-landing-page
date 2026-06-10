@@ -2,7 +2,6 @@ import {
   INDURA_PRIVACY_POLICY_URL,
   INDURA_TERMS_AND_SERVICE_URL,
 } from "@/lib/indura-legal-links";
-import { showBlogSection } from "@/lib/feature-flags";
 
 export const WAITLIST_FORM_URL = "https://forms.gle/jZpee78KBPccwMBp6";
 
@@ -18,17 +17,13 @@ export const BRAND = {
   cardBorder: "#eceff3",
 } as const;
 
-const allMainNavItems = [
+export const mainNavItems = [
   { label: "For The Consumer", href: "/#consumer" },
   { label: "Health Providers", href: "/#providers" },
   { label: "Institutional Desk", href: "/#institutions" },
-  { label: "Blog", href: "/#blog" },
+  { label: "Blog", href: "/blog" },
   { label: "Contact Us", href: "/contact" },
 ];
-
-export const mainNavItems = showBlogSection
-  ? allMainNavItems
-  : allMainNavItems.filter((item) => item.href !== "/#blog");
 
 export const socialLinks = [
   {
@@ -49,15 +44,11 @@ export const footerPlatformLinks = [
   { name: "Institutional Dashboard", href: "/#institutions" },
 ];
 
-const allFooterResourceLinks = [
-  { name: "Blog & Updates", href: "/#blog" },
+export const footerResourceLinks = [
+  { name: "Blog & Updates", href: "/blog" },
   { name: "FAQs", href: "/#faq" },
   { name: "Contact Us", href: "/contact" },
 ];
-
-export const footerResourceLinks = showBlogSection
-  ? allFooterResourceLinks
-  : allFooterResourceLinks.filter((item) => item.href !== "/#blog");
 
 export const footerCompanyLinks = [
   { name: "Become a Provider", href: "/become-a-provider" },
@@ -137,34 +128,5 @@ export const infrastructureFeatures = [
     title: "Treasury-Grade Security",
     description:
       "Built on public-company standard compliance, securing both private out-of-pocket savings and multilateral donor block capital.",
-  },
-];
-
-export const blogPosts = [
-  {
-    category: "Healthcare Fintech",
-    title:
-      "How Healthcare Fintech Platforms Like Mender Plus Are Transforming Patient Payments in Africa",
-    description:
-      "Mender Plus is integrating technology, financial services, and healthcare delivery to make medical payments instant, transparent, and accessible.",
-    href: "https://medium.com/@DavidBobaii/how-healthcare-fintech-platforms-like-mender-plus-are-transforming-patient-payments-and-services-in-e9e39c9eb5b1",
-    icon: "newspaper" as const,
-  },
-  {
-    category: "Our Mission",
-    title: "When It Matters Most: The Mission Behind Mender Plus",
-    description:
-      "Born in crisis, Mender Plus exists for the moments when seconds count and help must be fast, reliable, and human.",
-    href: "https://medium.com/@DavidBobaii/when-it-matters-most-the-mission-behind-mender-plus-da2a3132b3b1",
-    icon: "heart" as const,
-  },
-  {
-    category: "Founder Story",
-    title:
-      "The Story Behind Mender Plus: Turning a Personal Experience into a Lifesaving Solution",
-    description:
-      "How a family emergency became the mission behind Indura Health—a dedicated savings wallet that connects patients directly to care.",
-    href: "https://medium.com/@DavidBobaii/the-story-behind-mender-plus-turning-a-personal-experience-into-a-lifesaving-solution-david-bobai-ba9751b66948",
-    icon: "book" as const,
   },
 ];

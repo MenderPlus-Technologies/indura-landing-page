@@ -9,7 +9,6 @@ import { InfrastructureSection } from "./components/infrastructure-section";
 import { NavigationMenuSection } from "./components/navbar";
 import { RevampHeroSection } from "./components/revamp-hero";
 import { TrustBannerSection } from "./components/trust-banner";
-import { showBlogSection } from "@/lib/feature-flags";
 
 export default function Homepage() {
   return (
@@ -22,7 +21,7 @@ export default function Homepage() {
           <TrustBannerSection />
           <EcosystemSection />
           <InfrastructureSection />
-          {showBlogSection && <BlogSection />}
+          <BlogSection />
           <ContactCtaSection />
           <div id="faq">
             <FaqSection />
