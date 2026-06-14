@@ -1,16 +1,22 @@
 "use client";
 
 import { EcosystemHashLink } from "@/app/components/ecosystem-hash-link";
+import Image from "next/image";
 import { JSX, useState } from "react";
 import { WaitlistModal } from "../waitlist-modal";
+
+const HERO_PHONE_MOBILE =
+  "https://res.cloudinary.com/dcxdrsgjs/image/upload/v1764952208/Group_1000005655_x3l119.png";
+const HERO_PHONE_DESKTOP =
+  "https://res.cloudinary.com/dcxdrsgjs/image/upload/v1764951766/Group_1000005655_mudqsb.svg";
 
 export const RevampHeroSection = (): JSX.Element => {
   const [showWaitlist, setShowWaitlist] = useState(false);
 
   return (
     <>
-      <section className="plusJakarta relative flex w-full flex-col items-center overflow-hidden bg-[url('/Hero.svg')] bg-cover bg-center bg-no-repeat px-4 sm:px-8 lg:px-10 xl:px-16 pt-16 md:pt-24 lg:pt-28 pb-16 md:pb-20 transform-gpu">
-        <header className="relative flex w-full max-w-[1016px] xl:max-w-[1200px] flex-col items-center text-center">
+      <section className="plusJakarta relative flex w-full flex-col items-center overflow-hidden bg-[url('/Hero.svg')] bg-cover bg-center bg-no-repeat px-4 sm:px-8 lg:px-10 xl:px-16 pt-16 md:pt-24 lg:pt-28 pb-0 transform-gpu">
+        <header className="relative z-10 flex w-full max-w-[1016px] xl:max-w-[1200px] flex-col items-center text-center">
           <h1 className="mb-6 w-full px-4 text-[#0d0d12] text-3xl sm:text-4xl md:text-5xl lg:text-[56px] xl:text-[68px] font-medium leading-[1.1] lg:leading-[1.2] tracking-[-0.02em]">
             <span className="lg:whitespace-nowrap">The Financial Operating System</span>
             <br className="hidden lg:block" />
@@ -36,6 +42,30 @@ export const RevampHeroSection = (): JSX.Element => {
             </EcosystemHashLink>
           </div>
         </header>
+
+        <div className="relative w-full max-w-[1432px] h-52 sm:h-[280px] md:h-[360px] lg:h-[560px] xl:h-[588px] mt-4 sm:mt-4 md:mt-4" />
+
+        <div className="absolute bottom-0 left-1/2 z-0 w-[280px] sm:w-[400px] md:w-[500px] -translate-x-1/2 lg:hidden transform-gpu pointer-events-none">
+          <Image
+            src={HERO_PHONE_MOBILE}
+            alt="Indura Health app on mobile devices"
+            width={500}
+            height={600}
+            className="h-auto w-full object-contain"
+            priority
+          />
+        </div>
+
+        <div className="absolute bottom-0 left-1/2 z-0 hidden w-[650px] -translate-x-1/2 lg:block xl:w-[761px] transform-gpu pointer-events-none">
+          <Image
+            src={HERO_PHONE_DESKTOP}
+            alt="Indura Health app on mobile devices"
+            width={761}
+            height={588}
+            className="h-auto w-full object-contain"
+            priority
+          />
+        </div>
       </section>
 
       <WaitlistModal isOpen={showWaitlist} onClose={() => setShowWaitlist(false)} />
