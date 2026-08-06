@@ -7,7 +7,6 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import { BRAND } from "@/lib/site-config";
 import type { PublicCampaign } from "@/lib/campaign/types";
 import {
@@ -22,14 +21,19 @@ interface CampaignDonateModalProps {
   onClose: () => void;
 }
 
+function isValidEmail(email: string): boolean {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
 export function CampaignDonateModal({
   campaign,
   open,
   onClose,
 }: CampaignDonateModalProps) {
   const [amount, setAmount] = useState("");
-  const [donorName, setDonorName] = useState("");
-  const [message, setMessage] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [anonymous, setAnonymous] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -49,6 +53,25 @@ export function CampaignDonateModal({
       return;
     }
 
+    const trimmedEmail = email.trim();
+    const trimmedPhone = phone.trim();
+    const trimmedName = name.trim();
+
+    if (!trimmedEmail || !isValidEmail(trimmedEmail)) {
+      toast.error("Enter a valid email address");
+      return;
+    }
+
+    if (!trimmedPhone) {
+      toast.error("Enter a phone number");
+      return;
+    }
+
+    if (!anonymous && !trimmedName) {
+      toast.error("Enter your name or choose anonymous donation");
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
@@ -57,8 +80,9 @@ export function CampaignDonateModal({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           amount: parsedAmount,
-          donorName: anonymous ? undefined : donorName || undefined,
-          message: message || undefined,
+          name: anonymous ? "Anonymous" : trimmedName,
+          email: trimmedEmail,
+          phone: trimmedPhone,
           anonymous,
         }),
       });
@@ -70,8 +94,7 @@ export function CampaignDonateModal({
 
       if (!response.ok || !payload.checkoutUrl) {
         throw new Error(
-          payload.message ||
-            "Web donations are not live yet. The backend checkout endpoint is still being set up.",
+          payload.message || "Unable to start donation checkout.",
         );
       }
 
@@ -132,24 +155,41 @@ export function CampaignDonateModal({
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="donor-name">Your name (optional)</Label>
+            <Label htmlFor="donor-name">
+              Full name{anonymous ? " (hidden)" : ""}
+            </Label>
             <Input
               id="donor-name"
               placeholder="Ada O."
-              value={donorName}
+              value={name}
               disabled={anonymous}
-              onChange={(event) => setDonorName(event.target.value)}
+              onChange={(event) => setName(event.target.value)}
+              required={!anonymous}
             />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="donation-message">Message (optional)</Label>
-            <Textarea
-              id="donation-message"
-              placeholder="Wishing you a speedy recovery"
-              value={message}
-              onChange={(event) => setMessage(event.target.value)}
-              rows={3}
+            <Label htmlFor="donor-email">Email</Label>
+            <Input
+              id="donor-email"
+              type="email"
+              placeholder="you@example.com"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              required
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="donor-phone">Phone</Label>
+            <Input
+              id="donor-phone"
+              type="tel"
+              inputMode="tel"
+              placeholder="08012345678"
+              value={phone}
+              onChange={(event) => setPhone(event.target.value)}
+              required
             />
           </div>
 

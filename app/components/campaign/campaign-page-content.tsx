@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { BRAND } from "@/lib/site-config";
 import {
   formatCategoryLabel,
+  getCampaignClosedReason,
   isCampaignDonatable,
 } from "@/lib/campaign/format";
 import type { PublicCampaign } from "@/lib/campaign/types";
@@ -44,7 +45,9 @@ function CampaignActionButtons({
             ? "h-11 flex-1 rounded-xl text-sm font-semibold text-white sm:text-base"
             : "h-12 w-full rounded-xl text-base font-semibold text-white"
         }
-        style={{ backgroundColor: canDonate ? BRAND.primary : undefined }}
+        style={{
+          backgroundColor: canDonate ? BRAND.primary : "#818898",
+        }}
       >
         <Heart className="h-4 w-4" />
         {canDonate ? "Donate now" : "Campaign closed"}
@@ -71,6 +74,7 @@ export function CampaignPageContent({ campaign }: CampaignPageContentProps) {
   const [donateOpen, setDonateOpen] = useState(false);
   const [shareOpen, setShareOpen] = useState(false);
   const canDonate = isCampaignDonatable(campaign);
+  const closedReason = getCampaignClosedReason(campaign);
 
   return (
     <div className="min-h-screen bg-[#fafbfc] plusJakarta">
@@ -82,7 +86,7 @@ export function CampaignPageContent({ campaign }: CampaignPageContentProps) {
           <aside className="order-1 space-y-4 lg:order-2 lg:sticky lg:top-24 lg:self-start">
             <CampaignProgressCard campaign={campaign} />
 
-            <div className="hidden rounded-3xl border border-[#eceff3] bg-white p-6 shadow-sm lg:block">
+            <div className="rounded-3xl border border-[#eceff3] bg-white p-5 shadow-sm sm:p-6">
               <CampaignActionButtons
                 canDonate={canDonate}
                 onDonate={() => setDonateOpen(true)}
@@ -91,12 +95,11 @@ export function CampaignPageContent({ campaign }: CampaignPageContentProps) {
 
               {!canDonate ? (
                 <p className="mt-3 text-sm text-[#666d80]">
-                  This campaign is no longer accepting donations.
+                  {closedReason ?? "This campaign is no longer accepting donations."}
                 </p>
               ) : (
                 <p className="mt-3 text-sm leading-6 text-[#666d80]">
-                  Donations are processed securely. Web checkout goes live once
-                  the backend endpoint is ready.
+                  Donations are processed securely through Indura checkout.
                 </p>
               )}
             </div>
@@ -142,7 +145,7 @@ export function CampaignPageContent({ campaign }: CampaignPageContentProps) {
       </main>
 
       {/* Sticky donate bar on mobile/tablet */}
-      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-[#eceff3] bg-white/95 p-4 backdrop-blur lg:hidden">
+      <div className="fixed inset-x-0 bottom-0 z-50 border-t border-[#eceff3] bg-white p-4 pb-[max(1rem,env(safe-area-inset-bottom))] shadow-[0_-4px_20px_rgba(0,0,0,0.08)] md:hidden">
         <div className="mx-auto w-full max-w-5xl">
           <CampaignActionButtons
             compact

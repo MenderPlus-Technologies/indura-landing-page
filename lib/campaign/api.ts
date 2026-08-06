@@ -1,7 +1,12 @@
 import { MOCK_CAMPAIGN } from "./mock-campaign";
+import {
+  createMockDonationStatus,
+  isMockDonationReference,
+} from "./dev-mock";
 import type {
-  DonateInitiateRequest,
-  DonateInitiateResponse,
+  DonateCheckoutRequest,
+  DonateCheckoutResponse,
+  DonationStatusResponse,
   PublicCampaign,
 } from "./types";
 
@@ -80,16 +85,98 @@ export class CampaignApiError extends Error {
   }
 }
 
+function unwrapApiData<T>(payload: unknown): T {
+  if (
+    payload &&
+    typeof payload === "object" &&
+    "data" in payload &&
+    (payload as { data?: unknown }).data !== undefined
+  ) {
+    return (payload as { data: T }).data;
+  }
+
+  return payload as T;
+}
+
+function extractCheckoutResponse(payload: unknown): DonateCheckoutResponse {
+  const data = unwrapApiData<Record<string, unknown>>(payload);
+  const payment =
+    (data.payment as Record<string, unknown> | undefined) ?? data;
+
+  const checkoutUrl = String(
+    payment.checkoutUrl ??
+      payment.checkout_url ??
+      payment.checkoutURL ??
+      "",
+  );
+  const reference = String(payment.reference ?? "");
+
+  if (!checkoutUrl || !reference) {
+    throw new CampaignApiError("Invalid checkout response from server", 502);
+  }
+
+  return { checkoutUrl, reference };
+}
+
+function extractDonationStatus(payload: unknown): DonationStatusResponse {
+  const data = unwrapApiData<Record<string, unknown>>(payload);
+  const donation =
+    (data.donation as Record<string, unknown> | undefined) ??
+    (data.payment as Record<string, unknown> | undefined) ??
+    data;
+
+  const reference = String(donation.reference ?? "");
+  const status = String(
+    donation.status ?? donation.paymentStatus ?? "pending",
+  ).toLowerCase() as DonationStatusResponse["status"];
+
+  if (!reference) {
+    throw new CampaignApiError("Invalid donation status response", 502);
+  }
+
+  const campaignIdRaw =
+    donation.campaignId ??
+    donation.campaign_id ??
+    (donation.campaign as Record<string, unknown> | undefined)?._id ??
+    (donation.campaign as Record<string, unknown> | undefined)?.id;
+
+  return {
+    reference,
+    status,
+    amount:
+      typeof donation.amount === "number"
+        ? donation.amount
+        : Number(donation.amount) || undefined,
+    currency:
+      typeof donation.currency === "string" ? donation.currency : undefined,
+    campaignId: campaignIdRaw ? String(campaignIdRaw) : undefined,
+    message:
+      typeof donation.message === "string" ? donation.message : undefined,
+  };
+}
+
 export async function fetchPublicCampaign(
   campaignId: string,
 ): Promise<PublicCampaign> {
-  if (campaignId === "demo" || process.env.NEXT_PUBLIC_USE_MOCK_CAMPAIGN === "true") {
+  if (
+    campaignId === "demo" ||
+    process.env.NEXT_PUBLIC_USE_MOCK_CAMPAIGN === "true"
+  ) {
     return { ...MOCK_CAMPAIGN, id: campaignId };
   }
 
-  const response = await fetch(`${API_BASE_URL}/campaigns/${campaignId}`, {
-    next: { revalidate: 60 },
-  });
+  let response: Response;
+
+  try {
+    response = await fetch(`${API_BASE_URL}/campaigns/${campaignId}`, {
+      next: { revalidate: 60 },
+    });
+  } catch {
+    throw new CampaignApiError(
+      "Unable to reach the campaign API. Check your connection or API URL.",
+      503,
+    );
+  }
 
   if (!response.ok) {
     throw new CampaignApiError(
@@ -106,52 +193,114 @@ export async function fetchPublicCampaign(
   return normalizeCampaign(payload.campaign);
 }
 
-export async function initiateCampaignDonation(
+export async function initiateDonationCheckout(
   campaignId: string,
-  body: DonateInitiateRequest,
-): Promise<DonateInitiateResponse> {
-  const response = await fetch(`${API_BASE_URL}/campaigns/${campaignId}/donate/initiate`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
+  body: DonateCheckoutRequest,
+): Promise<DonateCheckoutResponse> {
+  const response = await fetch(
+    `${API_BASE_URL}/campaigns/${campaignId}/donations/checkout`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
     },
-    body: JSON.stringify(body),
-  });
+  );
 
   if (!response.ok) {
     const errorBody = (await response.json().catch(() => null)) as
-      | { message?: string }
+      | { message?: string; error?: { message?: string } }
       | null;
 
-    throw new CampaignApiError(
-      errorBody?.message || "Unable to start donation checkout",
-      response.status,
-    );
+    const message =
+      errorBody?.error?.message ||
+      errorBody?.message ||
+      "Unable to start donation checkout";
+
+    throw new CampaignApiError(message, response.status);
   }
 
-  const payload = (await response.json()) as {
-    checkoutUrl?: string;
-    checkout_url?: string;
-    reference?: string;
-    data?: {
-      checkoutUrl?: string;
-      checkout_url?: string;
-      reference?: string;
-    };
-  };
-
-  const checkoutUrl =
-    payload.checkoutUrl ||
-    payload.checkout_url ||
-    payload.data?.checkoutUrl ||
-    payload.data?.checkout_url;
-  const reference = payload.reference || payload.data?.reference;
-
-  if (!checkoutUrl || !reference) {
-    throw new CampaignApiError("Invalid checkout response from server", 502);
-  }
-
-  return { checkoutUrl, reference };
+  const payload = await response.json();
+  return extractCheckoutResponse(payload);
 }
 
+export async function fetchDonationStatus(
+  reference: string,
+): Promise<DonationStatusResponse> {
+  if (isMockDonationReference(reference)) {
+    return createMockDonationStatus({
+      reference,
+      status: "successful",
+    });
+  }
+
+  const response = await fetch(
+    `${API_BASE_URL}/campaigns/donations/${reference}/status`,
+    { cache: "no-store" },
+  );
+
+  if (!response.ok) {
+    const errorBody = (await response.json().catch(() => null)) as
+      | { message?: string; error?: { message?: string } }
+      | null;
+
+    const message =
+      errorBody?.error?.message ||
+      errorBody?.message ||
+      "Unable to verify donation status";
+
+    throw new CampaignApiError(message, response.status);
+  }
+
+  const payload = await response.json();
+  return extractDonationStatus(payload);
+}
+
+/** @deprecated Use initiateDonationCheckout */
+export const initiateCampaignDonation = initiateDonationCheckout;
+
 export { getCampaignShareUrl } from "./share";
+
+export function getDonationSuccessUrl(
+  campaignId: string,
+  origin?: string,
+): string {
+  const siteUrl =
+    origin ||
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    "https://www.indurahealth.com";
+
+  return `${siteUrl.replace(/\/$/, "")}/campaign/${campaignId}/donate/success`;
+}
+
+/** URL the payment gateway should return to (backend adds ?reference=). */
+export function getDonationCallbackUrl(
+  campaignId: string,
+  origin?: string,
+): string {
+  const siteUrl =
+    origin ||
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    "https://www.indurahealth.com";
+
+  return `${siteUrl.replace(/\/$/, "")}/campaign/${campaignId}?payment=callback`;
+}
+
+export function isDonationSuccessful(
+  status: DonationStatusResponse["status"],
+): boolean {
+  return status === "successful" || status === "success" || status === "completed";
+}
+
+export function isDonationPending(
+  status: DonationStatusResponse["status"],
+): boolean {
+  return status === "pending";
+}
+
+export function isDonationFailed(
+  status: DonationStatusResponse["status"],
+): boolean {
+  return status === "failed" || status === "cancelled";
+}

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 import { CampaignPageContent } from "@/app/components/campaign/campaign-page-content";
 import {
@@ -10,6 +10,10 @@ import {
 
 interface CampaignPageProps {
   params: Promise<{ id: string }>;
+  searchParams: Promise<{
+    payment?: string;
+    reference?: string;
+  }>;
 }
 
 export async function generateMetadata({
@@ -52,8 +56,19 @@ export async function generateMetadata({
   }
 }
 
-export default async function CampaignPage({ params }: CampaignPageProps) {
+export default async function CampaignPage({
+  params,
+  searchParams,
+}: CampaignPageProps) {
   const { id } = await params;
+  const { payment, reference } = await searchParams;
+
+  // Payment gateway returns here after checkout with ?payment=callback&reference=CDON-...
+  if (payment === "callback" && reference) {
+    redirect(
+      `/campaign/${id}/donate/success?reference=${encodeURIComponent(reference)}`,
+    );
+  }
 
   let campaign;
 

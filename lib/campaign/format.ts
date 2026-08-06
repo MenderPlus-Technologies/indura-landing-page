@@ -69,5 +69,29 @@ export function formatCategoryLabel(category: string): string {
 }
 
 export function isCampaignDonatable(campaign: PublicCampaign): boolean {
-  return campaign.status === "active";
+  if (campaign.status !== "active") return false;
+
+  if (campaign.endDate) {
+    const deadline = new Date(campaign.endDate);
+    deadline.setHours(23, 59, 59, 999);
+    if (deadline.getTime() < Date.now()) return false;
+  }
+
+  return true;
+}
+
+export function getCampaignClosedReason(campaign: PublicCampaign): string | null {
+  if (campaign.status !== "active") {
+    return "This campaign is no longer active.";
+  }
+
+  if (campaign.endDate) {
+    const deadline = new Date(campaign.endDate);
+    deadline.setHours(23, 59, 59, 999);
+    if (deadline.getTime() < Date.now()) {
+      return "This campaign has passed its deadline.";
+    }
+  }
+
+  return null;
 }
