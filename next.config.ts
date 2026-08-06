@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "res.cloudinary.com",
-        pathname: "/dcxdrsgjs/image/upload/**",
+        pathname: "/**",
       },
     ],
     dangerouslyAllowSVG: true,
