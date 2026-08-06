@@ -3,6 +3,10 @@ import {
   createMockDonationStatus,
   isMockDonationReference,
 } from "./dev-mock";
+import {
+  getPaymentCallbackOrigin,
+  getPublicSiteOrigin,
+} from "./site-url";
 import type {
   DonateCheckoutRequest,
   DonateCheckoutResponse,
@@ -264,27 +268,19 @@ export { getCampaignShareUrl } from "./share";
 
 export function getDonationSuccessUrl(
   campaignId: string,
-  origin?: string,
+  requestOrigin?: string,
 ): string {
-  const siteUrl =
-    origin ||
-    process.env.NEXT_PUBLIC_SITE_URL ||
-    "https://www.indurahealth.com";
-
-  return `${siteUrl.replace(/\/$/, "")}/campaign/${campaignId}/donate/success`;
+  const siteUrl = getPublicSiteOrigin(requestOrigin);
+  return `${siteUrl}/campaign/${campaignId}/donate/success`;
 }
 
 /** URL the payment gateway should return to (backend adds ?reference=). */
 export function getDonationCallbackUrl(
   campaignId: string,
-  origin?: string,
+  requestOrigin?: string,
 ): string {
-  const siteUrl =
-    origin ||
-    process.env.NEXT_PUBLIC_SITE_URL ||
-    "https://www.indurahealth.com";
-
-  return `${siteUrl.replace(/\/$/, "")}/campaign/${campaignId}?payment=callback`;
+  const callbackOrigin = getPaymentCallbackOrigin(requestOrigin);
+  return `${callbackOrigin}/campaign/${campaignId}?payment=callback`;
 }
 
 export function isDonationSuccessful(
