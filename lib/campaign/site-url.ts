@@ -22,21 +22,13 @@ export function getPublicSiteOrigin(requestOrigin?: string): string {
   return DEFAULT_SITE_URL;
 }
 
-/** Host the payment gateway returns to after checkout (often app.indurahealth.com). */
+/** Host the payment gateway should return to after checkout. Use www — it serves campaign routes. */
 export function getPaymentCallbackOrigin(requestOrigin?: string): string {
   if (process.env.NEXT_PUBLIC_PAYMENT_CALLBACK_URL) {
     return normalizeOrigin(process.env.NEXT_PUBLIC_PAYMENT_CALLBACK_URL);
   }
 
-  if (
-    requestOrigin &&
-    (requestOrigin.includes("localhost") || requestOrigin.includes("127.0.0.1"))
-  ) {
-    return normalizeOrigin(requestOrigin);
-  }
-
-  // Backend / Flutterwave typically redirect to the app subdomain.
-  return `https://${APP_HOST}`;
+  return getPublicSiteOrigin(requestOrigin);
 }
 
 export function isAppHost(host: string): boolean {

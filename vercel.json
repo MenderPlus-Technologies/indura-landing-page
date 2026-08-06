@@ -1,0 +1,15 @@
+{
+  "redirects": [
+    {
+      "source": "/campaign/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "app.indurahealth.com"
+        }
+      ],
+      "destination": "https://www.indurahealth.com/campaign/:path*",
+      "permanent": false
+    }
+  ]
+}
