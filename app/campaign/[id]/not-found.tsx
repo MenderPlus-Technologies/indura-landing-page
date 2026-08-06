@@ -22,12 +22,7 @@ export default function CampaignNotFound() {
         <Button asChild className="mt-8 rounded-xl bg-[#009688] px-6 text-white hover:bg-[#00897b]">
           <Link href="/">Back to Indura Health</Link>
         </Button>
-        <p className="mt-6 text-sm text-[#818898]">
-          Testing locally? Try{" "}
-          <Link href="/campaign/demo" className="font-medium text-[#009688] hover:underline">
-            /campaign/demo
-          </Link>
-        </p>
+        
       </main>
       <FooterSection />
     </div>
