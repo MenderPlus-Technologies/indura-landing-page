@@ -85,6 +85,7 @@ export function MarketingShell({ children }: { children: ReactNode }) {
     if (!main) return;
 
     function onClick(event: MouseEvent) {
+      if (!main) return;
       if (event.defaultPrevented || event.button !== 0) return;
       if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
       const target = event.target;
@@ -247,6 +248,7 @@ export function MarketingShell({ children }: { children: ReactNode }) {
     const buttons: HTMLButtonElement[] = [];
 
     function show(index: number) {
+      if (!wrap) return;
       cur = (index + slides.length) % slides.length;
       slides.forEach((slide, slideIndex) => {
         const active = slideIndex === cur;
