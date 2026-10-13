@@ -3,10 +3,21 @@ import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+function escapeHtml(value: string) {
+  return value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
+}
+
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { fullName, email, message } = body;
+    const fullName = String(body.fullName ?? "").trim();
+    const email = String(body.email ?? "").trim();
+    const message = String(body.message ?? "").trim();
+    const role = String(body.role ?? "").trim();
 
     if (!fullName || !email || !message) {
       return NextResponse.json(
@@ -24,11 +35,12 @@ export async function POST(request: Request) {
     <div style="font-family: Arial, sans-serif; padding: 20px;">
       <h2 style="color: #009688;">New Contact Form Submission</h2>
       <div style="margin-top: 20px;">
-        <p><strong>Name:</strong> ${fullName}</p>
-        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Name:</strong> ${escapeHtml(fullName)}</p>
+        <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+        ${role ? `<p><strong>I am:</strong> ${escapeHtml(role)}</p>` : ""}
         <p><strong>Message:</strong></p>
-        <p style="background-color: #f5f5f5; padding: 15px; border-radius: 5px;">
-          ${message}
+        <p style="background-color: #f5f5f5; padding: 15px; border-radius: 5px; white-space: pre-wrap;">
+          ${escapeHtml(message)}
         </p>
       </div>
     </div>

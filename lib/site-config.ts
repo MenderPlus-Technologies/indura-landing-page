@@ -56,12 +56,10 @@ export const footerCompanyLinks = [
   {
     name: "Privacy Policy",
     href: INDURA_PRIVACY_POLICY_URL,
-    external: true,
   },
   {
     name: "Terms & Conditions",
     href: INDURA_TERMS_AND_SERVICE_URL,
-    external: true,
   },
 ];
 
